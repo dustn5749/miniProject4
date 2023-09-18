@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.kosa.project4.member.model.Member"  alias="Member" />
+		<typeAlias type="com.kosa.project4.board.model.Board"  alias="Board" />
+		<typeAlias type="com.kosa.project4.notice.model.Notice"  alias="Notice" />
+		<typeAlias type="com.kosa.project4.comment.model.Comment"  alias="Comment" />
+		<typeAlias type="com.kosa.project4.board.model.AttacheFile"  alias="AttacheFile" />
+	</typeAliases>
+</configuration>

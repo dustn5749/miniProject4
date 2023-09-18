@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+
+ <resultMap id="boardMap" type="Board"></resultMap>
+
+ 
+   <select id="getBoard" resultType="Board" >
+      select 
+           BOARDNUM
+         , TITLE
+         , ID
+         , CONTENT
+         , REGDATE
+         , READCOUNT 
+      from board 
+      where BOARDNUM = #{boardNum}
+   </select>
+   
+   <select id="getSearchBoardList" statementType="CALLABLE">
+   	{call board_list(
+   		#{searchTitle} 
+   		, #{StartNo}
+   		, #{EndNo}
+   		, #{v_cursor, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=boardMap}
+   	)}
+   </select>
+   
+   
+   
+   <insert id="insertBoard" >
+      <selectKey keyProperty="boardid" resultType="int"  order="BEFORE">
+         select 
+            seq_board.nextval boardid 
+         from dual
+      </selectKey>
+      INSERT INTO board (
+           pid
+         , boardid
+         , title
+         , contents
+         , writer_uid
+         , reg_date
+      ) VALUES (
+           0
+         , #{boardid}
+         , #{title}
+         , #{contents}
+         , #{writer_uid}
+         , sysdate
+      )
+   </insert>
+
+   <select id="getTotalCount" resultType="int">
+         select count(*) 
+         from board 
+   </select>
+   
+   
+   <update id="upReadCount">
+	<![CDATA[
+		UPDATE board SET  
+		readcount = readcount + 1 
+		WHERE BOARDNUM = #{boardNum}
+	]]>
+	</update>
+	
+   
+   <insert id="insertBoardReply" >
+      <selectKey keyProperty="boardid" resultType="int"  order="BEFORE">
+         select 
+            seq_board.nextval boardid 
+         from dual
+      </selectKey>
+      INSERT INTO board (
+           pid
+         , boardid
+         , title
+         , contents
+         , writer_uid
+         , reg_date
+      ) VALUES (
+            #{pid} 
+         , #{boardid}
+         , #{title}
+         , #{contents}
+         , #{writer_uid}
+         , sysdate
+      )
+   </insert>
+   
+   <update id="updateBoard">
+      update board set 
+           title=#{title}
+         , contents=#{contents} 
+      where boardid=#{boardid}
+   </update>
+   
+ 
+   <select id="boardTop5" resultType="Board">
+      <![CDATA[
+         select 
+            rownum, sub.*  
+         from (
+            select 
+               * 
+            from board 
+            order by board.boardid desc
+         ) sub 
+         where rownum <=5
+      ]]>
+   </select>
+   
+   <update id="viewCount">
+      update board set 
+         view_count = view_count + 1 
+      where boardId = #{boardId}
+   </update>
+   
+   <delete id="deleteBoards" >
+      delete from board 
+      where BOARDNUM in
+      <foreach item="boardnum" collection="array"  open="("  separator="," close=")"> 
+         #{boardnum}      
+      </foreach> 
+   </delete>
+   
+   <select id="getBoardList2" resultType="Board">
+      select * from (
+         select 
+            level, pid, boardid, step, title, writer_uid, reg_date, view_count
+         from board 
+         where delete_yn = 'N' 
+         <if test="boardid != 0">
+            <![CDATA[
+            and boardid > #{boardid}
+            ]]>
+         </if>
+         start with pid=0
+         CONNECT BY PRIOR boardid = pid
+         order SIBLINGS by boardid desc  
+      ) A 
+      <![CDATA[
+      where rownum <= 10
+      ]]>
+   </select>
+   
+   <select id="getboardListBoforeN">
+       select * from (
+           select * from board
+          <![CDATA[
+           where boardid < #{boardid} 
+          ]]>
+           order by boardid desc
+       ) A
+       <![CDATA[
+       where rownum <= N      
+       ]]>
+   </select>
+   
+</mapper>

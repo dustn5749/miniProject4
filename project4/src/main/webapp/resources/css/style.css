@@ -1,0 +1,710 @@
+@font-face {
+  font-family: 'OTWelcomeRA';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SUIT-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Dovemayo_gothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  
+}
+
+
+* {
+  margin:0;   /* 留덉쭊 由ъ뀑 */
+  padding:0;   /* �뙣�뵫 由ъ뀑 */
+  box-sizing: border-box;   /* 諛뺤뒪 �쁺�뿭�� �뀒�몢由ш퉴吏� */ 
+  font-family: 'SUIT-Regular';
+
+}
+a {
+  text-decoration:none;  /* �뀓�뒪�듃 留곹겕 諛묒쨪 �뾾�븷湲� */ 
+}
+ul {
+  list-style: none;
+}
+
+#container {
+  margin:0 auto;  /* �솕硫� 以묒븰�뿉 諛곗튂 */
+  width:1280px;
+     /* �꼫鍮� */
+}
+
+/*********************************/
+/* �뿤�뜑 �쁺�뿭 - 濡쒓퀬�� �궡鍮꾧쾶�씠�뀡 */
+/*********************************/
+
+header{
+  width:100%;    /*  �꼫鍮� */
+  height:100px;   /* �넂�씠 */ 
+  background-image: url(images/background.png);
+}
+
+/* 濡쒓퀬 */
+#logo{ 
+  float:left;   /* �쇊履쎌쑝濡� �뵆濡쒗똿 */ 
+  width:300px;   /*  �꼫鍮� */ 
+  height:100px;   /* �넂�씠 */
+  line-height:100px;  /* �꽭濡쒕줈 以묎컙�뿉 留욎땄 - 以꾧컙寃⑹쓣 �넂�씠 媛믨낵 媛숆쾶 */
+  padding-left:80px;  /* �쇊履쎌뿉 �뿬諛� */
+  padding-top: 10px;
+}
+
+/* �궡鍮꾧쾶�씠�뀡 */
+nav{  
+  float:right;   /* �삤瑜몄そ�쑝濡� �뵆濡쒗똿 */
+  width:900px;   /*   �꼫鍮� */  
+  height:100px;   /* 硫붾돱 �쁺�뿭 �넂�씠 */  
+  padding-top:40px;  /* 硫붾돱瑜� �븘�옒濡� �궡由ш린 �쐞�빐 */
+
+}
+
+.image-container {
+    position: relative;
+    text-align: center;
+}
+
+.image-text {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgb(184 184 184 / 70%);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 50px;
+}
+
+
+
+#topMenu {  
+  height:70px; 
+  font-weight: bold;
+}
+#topMenu > li {
+  float:left;  /* 硫붾돱 �빆紐⑹쓣 �쇊履쎌쑝濡� �뵆濡쒗똿 */ 
+  position: relative;  /* �꽌釉� 硫붾돱瑜� absolute濡� �븯湲� �쐞�빐, �씠 遺�遺꾩쓣 relative濡� */  
+}
+#topMenu > li > a{
+  display:block;  /* 留곹겕 �뀓�뒪�듃�뒗 釉붾줉�쑝濡� */ 
+  color:black;  /* 湲��옄 �깋 */
+  font-weight:600;  /* 湲��옄 援듦린 */
+  text-shadow:0 1px rgb(18, 94, 56);  /* 洹몃┝�옄 異붽� */
+  padding: 20px 60px;  /* �뙣�뵫 */ 
+}
+#topMenu > li > a > span {
+  font-size : 1.2em;   /* �꽌釉� 硫붾돱媛� �엳�뒗 �빆紐⑹뿉 �솕�궡�몴 �몴�떆 */   
+}
+#topMenu > li > a:hover {
+  color:#24723d;  /* 留덉슦�뒪 �삤踰꾪븯硫� �깋�긽 諛붾�� */ 
+  text-shadow:0 -1px #07c;  /* 湲��옄媛� �꼫臾� 援듭뼱吏�吏� �븡�룄濡� */
+}
+
+#topMenu > li > ul { /* �꽌釉� 硫붾돱 �뒪���씪 */
+  display: none;  /* �꽌釉� 硫붾돱 泥섏쓬�뿉�뒗 �솕硫댁뿉 �븞 蹂댁씠寃� */ 
+  position:absolute;  /* �꽌釉� 硫붾돱 �룷吏��뀛�떇 */ 
+  width:160px;
+  background:rgba(101, 185, 137, 0.6);  /* �뒳�씪�씠�뱶 �눥 鍮꾩튂�룄濡� 諛곌꼍 �깋 議곗젅 */
+  left:20px;     
+  margin:0;
+}
+#topMenu > li > ul > li {    
+  padding:10px 10px 10px 30px;   /* �꽌釉� 硫붾돱 �빆紐� */
+}
+#topMenu > li > ul > li > a { 
+  font-size:14px;   
+  padding:10px;
+  color:#000;  
+}
+#topMenu > li:hover > ul {
+  display: block;  /* 硫붿씤 硫붾돱 �빆紐� �쐞濡� �삤踰꾪븯硫� �꽌釉� 硫붾돱 �몴�떆 */
+  z-index:10;  /* �뒳�씪�씠�뱶 �눥�뿉 媛�由ъ� �븡寃� 議곗젅 */ 
+}
+#topMenu > li > ul > li > a:hover {
+  color: white;  /* �꽌釉� 硫붾돱 留덉슦�뒪 �삤踰꾪븯硫� �깋�긽 諛붾�� */   
+} 
+
+/********************************/
+/*   �씠誘몄� �뒳�씪�씠�뱶 �눥 �쁺�뿭    */
+/********************************/
+
+#slideShow {   
+  clear:both;   /* �뵆濡쒗똿 �빐�젣 */
+  width:100%;    /* �꼫鍮� */ 
+  height:500px;   /* �넂�씠 */ 
+  overflow:hidden;   /* �쁺�뿭 �꽆移섎㈃ 媛먯땄 */ 
+  position: relative;
+}
+#slides {
+  position: absolute;
+}
+#slides > img {
+  float:left;  /* 媛�濡쒕줈 諛곗튂 */
+  width: 1280px;
+}
+
+button{
+  position: absolute;
+  height:100%;  /* �쐞�븘�옒 媛��뱷 李④쾶 */ 
+  top:0;
+  border:none;  /* �뀒�몢由� �뾾�씠 */  
+  padding:20px;
+  background-color: transparent;  /* �닾紐� 諛곌꼍 */ 
+  color:#000;  /* �솕�궡�몴 �깋�� 寃��젙 */  
+  font-weight:800;  /* 援듦쾶 */ 
+  font-size: 24px;  /* �솕�궡�몴 �겕湲� */ 
+  opacity: 0.5;  /* 諛섑닾紐� */ 
+}
+#prev {
+  left:0;  /* �쇊履쎌쑝濡� 遺숈뿬�꽌 */ 
+}
+#next {
+  right:0;  /* �삤瑜몄そ�쑝濡� 遺숈뿬�꽌 */ 
+}
+button:hover {
+  background-color:#222;  /* 吏숈� �쉶�깋 諛곌꼍 */
+  color:#fff;   /* �씛�깋 �솕�궡�몴 */ 
+  opacity:0.6;   /* 遺덊닾紐낅룄瑜� 議곌툑 �넂�엫 */ 
+  cursor:pointer;  /* 而ㅼ꽌 紐⑥뼇�쓣 �룷�씤�꽣濡� */ 
+}
+button:focus {
+  outline:0;  /* �븘�썐�듃�씪�씤 �뾾�빊 */
+}
+
+
+/**************************************/
+/*   肄섑뀗痢� �쁺�뿭  - �꺆 硫붾돱�� �� 留곹겕 */
+/**************************************/
+
+#contents{  
+  width:100%;   /* �꼫鍮� */
+  height:400px;  /* �넂�씠 */   
+  margin-top: 50px;  /* 留덉쭊 異붽� */
+}
+
+/* �꺆 硫붾돱 */
+#tabMenu{  
+  float:left;  /* �쇊履쎌쑝濡� �뵆濡쒗똿 */ 
+  width:600px;   /* �꼫鍮� */ 
+  height:100%;   /* �넂�씠 */
+  margin-top:10px;  /* �꺆 硫붾돱 �쐞履쎌뿉 �뿬諛� �몢湲� */
+}
+#tabMenu  input[type="radio"] {
+  display:none;  /* �씪�뵒�삤 踰꾪듉 媛먯땄 */ 
+}
+#tabMenu label {  /* �꺆 �젣紐� �뒪���씪 */ 
+  display:inline-block;  /* �꺆�뱾�쓣 媛�濡쒕줈 諛곗튂 */
+  margin:0 0;  /* 留덉쭊 */ 
+  padding:15px 25px;  /* �뙣�뵫 */
+  font-weight:600;   /* 湲��옄 援듦린 */
+  text-align: center;   /* 湲��옄 �젙�젹 */
+  color:#acb7b0;  /* 湲��옄 �깋 */ 
+  border:1px solid transparent;  /* �뀒�몢由� */ 
+}
+#tabMenu label:hover {  /* 留덉슦�뒪 �삤踰꾪뻽�쓣 �븣 �꺆 �젣紐� �뒪���씪 */
+  color:#222;  
+  cursor:pointer;
+}
+#tabMenu input:checked + label {  /* �솢�꽦�솕�맂 �꺆 �젣紐� �뒪���씪 */ 
+  color:#409158;
+  border:1px solid #daeadf;
+  background-color: #ddeae1;
+}
+
+.tabContent {  /* �꺆 �궡�슜 �뒪���씪 */
+  display:none;
+  padding:20px 0 0;
+  border-top:1px solid #daeadf;
+}
+.tabContent h2{  
+  display:none; 
+}
+
+#notice ul {
+  list-style: disc;
+  margin-left:30px;
+}
+#notice ul li {
+  font-size:16px;
+  line-height:2.8;
+}
+#notice ul li a {
+  color: black;
+}
+#notice ul> li > a:hover{
+  color: green;
+}
+#gallery ul li{
+  display:inline;  /* �씠誘몄� 媛�濡쒕줈 諛곗튂 */
+}
+
+#tab1:checked ~ #notice, 
+#tab2:checked ~ #gallery {
+  display:block;
+}
+#gallery ul li img {
+	width: 180px;
+	height: 200px;
+	transition: all 0.2s linear;
+}
+
+#gallery ul li:hover img{
+	transform: scale(1.8);
+} 
+/* �� 留곹겕 */ 
+#links{  
+  float:right;   /* �삤瑜몄そ�쑝濡� �뵆濡쒗똿 */
+  width:600px;   /* �꼫鍮� */
+  height:100%;   /* �넂�씠 */
+  margin-top:20px;  /* 留덉쭊 異붽� */
+}
+#links ul{
+  padding:0;  /* �뙣�뵫 */ 
+  overflow: hidden;  /* �꽆移섎뒗 寃껋� 媛먯땄 */
+}
+#links ul li{
+  float:left;  /* 媛�濡쒕줈 諛곗튂 */
+  width:33%;  /* 1/3 �겕湲곕쭔�겮�뵫 */
+  text-align:center;  /* 媛��슫�뜲 �젙�젹 */
+  margin:10px 0;  /* 留덉쭊 */
+}
+
+#links ul li a p {
+  font-size: 1em;
+}
+#links >ul>li >a:hover >span{
+  border: 3px solid green;
+  box-shadow: 2px 3px 5px 0px darkgreen ;
+}
+#links ul li a span{
+  display:block;  /* 釉붾줉 �젅踰⑤줈 */ 
+  margin:0 auto;  /* 媛��슫�뜲 諛곗튂 */ 
+  width:150px;  /* 媛�濡� �겕湲� */ 
+  height:150px;  /* �꽭濡� �겕湲� */
+  border-radius:100%;  /* �뀒�몢由� �뫁湲�寃�. border-radius: 150px濡� �빐�룄 �맖 */ 
+  border:1px solid #daeadf;  /* �뀒�몢由� �뒪���씪 */
+  line-height:150px;  /* �닔吏곸쑝濡� 以묎컙�뿉 �삤寃� */ 
+  align-items: center;
+}
+
+#quick-icon1 {
+  background-image:url('../images/icon1.png'); 
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 90px;
+  height: 90px;
+}
+#quick-icon2 {
+  background-image:url('../images/icon2.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 90px;
+  height: 90px;
+}
+#quick-icon3 {
+  background-image:url('../images/icon3.png');
+  background-position: center center; 
+  background-repeat: no-repeat;
+  width: 90px;
+  height: 90px;
+}
+
+#links ul li a p {
+  margin-top:15px;  /* �쐞履� 留덉쭊 */
+  font-weight:600;  /* 湲��옄 援듦린 */
+  color:#666;  /* 湲��옄 �깋 */
+}
+
+
+/******************/
+/*   푸터   */
+/******************/
+footer{   
+  width:1280px;   /* �꼫鍮� */
+  height:100px;  /* �넂�씠 */
+  border-top:2px solid #214d2c;
+  background-color: rgb(251, 247, 247);
+  bottom: 0;
+  margin: 0 auto;
+}
+#bottomMenu{
+  width:100%;
+  height:20px;
+  position:relative;  
+}
+#bottomMenu ul {
+  margin-top:15px;  
+}
+#bottomMenu ul li{
+  float:left;  /* 媛�濡쒕줈 諛곗튂 */ 
+  padding:5px 20px;
+  border-right:1px solid #ddd;   /* �빆紐� �삤瑜몄そ�뿉 �뀒�몢由� */ 
+}
+#bottomMenu ul li:last-child{
+  border:none;  /* 留덉�留� �빆紐⑹뿉�뒗 �삤瑜몄そ �뀒�몢由� �뾾�쓬 */  
+}
+#bottomMenu ul li a, #bottomMenu ul li a:visited {  
+  font-size:15px;  /* 湲��옄 �겕湲� */ 
+  color:#666;   /* 湲��옄 �깋 */ 
+}
+#sns {
+  position:absolute;  
+  right:0;  /* �삤瑜몄そ �걹�뿉 諛곗튂 */ 
+}
+#sns ul li{
+  border:none;  /* �뀒�몢由� �뾾�씠 */
+  padding:5px;   
+} 
+#company{
+  clear:left;  /* �뵆濡쒗똿 �빐�젣. clear:both�룄 媛��뒫 */
+  margin-top:25px;  /* �쐞履� 留덉쭊 */
+  margin-left:20px;  /* �쇊履� 留덉쭊 */ 
+}
+p {
+  font-size:14px;  /* 湲��옄 �겕湲� */
+  color:#aaa;    /* 湲��옄 �깋*/ 
+}
+/******************/
+/*   top5 공지사항 상세보기   */
+/******************/
+#dialog-form {
+  display: none;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#dialog-form fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+#dialog-form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#dialog-form input[type="text"],
+#dialog-form input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#dialog-form input[type="radio"] {
+  margin-right: 10px;
+}
+
+#dialog-form input[type="submit"] {
+  display: none;
+}
+
+#dialog-form-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+#dialog-form-buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#dialog-form-buttons button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: rgb(186, 235, 186);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'NanumSquareNeo-Variable';
+  color: #fff;
+}
+
+#dialog-form-buttons button:hover {
+  background-color: green;
+}
+
+/******************/
+/*   회원가입창   */
+/******************/
+    .dialogform {
+         /* 폼의 최대 너비를 조절하세요 */
+        margin: 0 auto; /* 가운데 정렬 */
+        padding: 20px;
+        background-color: #f2f2f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* 라벨 스타일 */
+    .dialogform label {
+        font-weight: bold;
+    }
+
+    /* 입력 필드 스타일 */
+    .dialogform input[type="text"],
+    .dialogform input[type="password"],
+    .dialogform input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    /* 동의사항 스타일 */
+    .dialogform table {
+        width: 100%;
+    }
+
+    /* 전체 동의 스타일 */
+    .dialogform #allCheck {
+        margin-right: 5px;
+    }
+
+    /* 동의사항 정보 스타일 */
+    .dialogform #info {
+        font-size: 12px;
+        color: #666;
+    }
+
+    /* 체크박스 스타일 */
+    .dialogform .checkboxInfo {
+        font-size: 12px;
+        color: #333;
+    }
+
+    /* 가입하기 버튼 스타일 */
+    .dialogform #joinBtn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    /* 가입하기 버튼 호버 효과 */
+    .dialogform #joinBtn:hover {
+        background-color: #0056b3;
+    }
+    
+/******************/
+/*   로그인창 css   */
+/******************/
+
+#dialog_form3 {
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%; /* 원하는 너비로 조절하세요 */
+}
+
+#dialog_form3 fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#dialog_form3 label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#dialog_form3 input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+#dialog_form3 input[type="text"]:focus {
+    outline: none;
+    border-color: lightblue;
+    box-shadow: 0 0 5px lightblue;
+}
+
+#dialog_form3 input[type="submit"] {
+    background-color: lightblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dialog_form3 input[type="submit"]:hover {
+    background-color: #3498db;
+}
+
+/******************/
+/*   마이페이지  css   */
+/******************/
+#dialog_form3 {
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%; /* 원하는 너비로 조절하세요 */
+}
+
+#dialog_form3 fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#dialog_form3 label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#dialog_form3 input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+}
+
+#dialog_form3 input[type="text"]:focus {
+    outline: none;
+    border-color: lightblue;
+    box-shadow: 0 0 5px lightblue;
+}
+
+#dialog_form3 input[type="submit"] {
+    background-color: lightblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dialog_form3 input[type="submit"]:hover {
+    background-color: #3498db;
+}
+
+#mypage_form {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#mypage_form fieldset {
+    border: 1px solid white;
+    border-radius: 8px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#mypage_form label {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+#mypage_form .input-field {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+#mypage_form .input-field:disabled {
+    background-color: #f5f5f5;
+    color: #777;
+}
+
+/******************/
+/*   아이디, 비밀번호찾기      */
+/******************/
+
+#searchId_dialog, #searchPwd_dialog {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#searchId_dialog fieldset, #searchPwd_dialog fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+#searchId_dialog label, #searchPwd_dialog label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#searchId_dialog input[type="text"], #searchPwd_dialog input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
+#searchId_dialog input[type="text"]:focus, #searchPwd_dialog input[type="text"]:focus {
+    outline: none;
+    border-color: lightblue;
+    box-shadow: 0 0 5px lightblue;
+}
+
+#searchId_dialog input[type="text"]:disabled, #searchPwd_dialog input[type="text"]:disabled {
+    background-color: #f5f5f5;
+    color: #777;
+}
+
+#searchId_dialog input[type="submit"], #searchPwd_dialog input[type="submit"] {
+    background-color: lightblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#searchId_dialog input[type="submit"]:hover, #searchPwd_dialog input[type="submit"]:hover {
+    background-color: #3498db;
+}

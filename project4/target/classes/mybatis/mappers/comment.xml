@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.comment">
+ 
+ <resultMap id="commentMap" type="Comment"></resultMap>
+
+ 
+ <select id="getCommentList" statementType="CALLABLE">
+ 	{call PLUS_REPLYLIST(
+ 		#{parentnum}
+ 		,#{boardnum}
+ 		, #{p_outmsg, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=commentMap}
+ 	)}
+ </select>
+ 
+ <insert id="insertComment" statementType="CALLABLE">
+ {call INSERT_COMMENT(
+        #{id}
+        , #{content}
+        , #{parentnum}
+        , #{p_outmsg, mode=OUT, jdbcType=VARCHAR}
+    )}
+ </insert>
+ 
+ <delete id="deleteComment" statementType="CALLABLE">
+  {call DELETE_REPLY(
+       #{boardnum}
+        , #{p_outmsg, mode=OUT, jdbcType=VARCHAR}
+    )}
+
+ </delete>
+ 
+ <update id="updateComment" statementType="CALLABLE">
+ 	{CALL UPDATE_REPLY(
+ 		#{boardnum}
+ 		, #{content}
+ 		, #{p_outmsg, mode=OUT, jdbcType=VARCHAR}
+ 	)}
+ 
+ </update>
+ 
+ <select id="totalCount" statementType="CALLABLE">
+ 	{CALL TOTAL_REPLY(
+ 		#{parentnum}
+ 		, #{p_outmsg, mode=OUT, jdbcType=VARCHAR}
+ 	)}
+ </select>
+
+</mapper>

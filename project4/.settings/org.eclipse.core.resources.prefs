@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/kosa/project4/comment/controller/CommentController.java=UTF-8
+encoding//src/main/java/com/kosa/project4/comment/dao/CommentDAO.java=UTF-8
+encoding//src/main/java/com/kosa/project4/member/model/Member.java=UTF-8
+encoding//src/main/java/com/kosa/project4/notice/dao/NoticeDAO.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/main.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/page/footer.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/page/header.jsp=UTF-8
+encoding//src/main/webapp/resources/css/style.css=UTF-8

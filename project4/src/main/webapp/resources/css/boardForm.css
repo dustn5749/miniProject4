@@ -1,0 +1,477 @@
+@charset "UTF-8";
+  @font-face {
+            font-family: 'LINESeedKR-Bd';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'OTWelcomeRA';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'NanumSquareNeo-Variable';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        a{
+    color: green;
+    font-weight: bold;
+        }
+     div {
+    text-align: center;
+    margin:  0 auto;
+    justify-content: center;
+  }
+#logo {
+	align-items: center;
+	width: 250px;
+	cursor: pointer;
+	margin: 10px;
+}
+        table {
+        margin: 0 auto}
+        table, tr, td {
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #f8ffee;
+			height:60px;
+        }
+        #content-boardList{
+            margin: 0 auto;
+            text-align: center;
+        }
+        #content-boardList>tr>td {
+        border-bottom: 1px solid rgb(129, 188, 84);
+        }
+        #boardListTitle{
+            height: 100px;
+            font-family: 'LINESeedKR-Bd';
+            text-align: center;
+            vertical-align: middle;
+            font-size: 40px;
+        }
+        #btnSpace{
+            height: 40px;
+            text-align: right;
+            padding-right: 10px;
+        }
+
+        #newBoard, #checkDelete, #checkModify {
+            font-family: 'NanumSquareNeo-Variable';
+            height: 30px;
+            font-size: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: rgb(129, 188, 84);
+            color: black;
+            border: none;
+            width:120px;
+            box-shadow: 1px 3px 3px 1px grey;
+        }
+          #newBoard:hover, #checkDelete:hover, #checkModify:hover{
+            color:white;
+            background-color: green;
+          }
+    button#showNotice{
+         font-family: 'NanumSquareNeo-Variable';
+            height: 30px;
+            font-size: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: rgb(84, 188, 186);
+            color: black;
+            border: none;
+            width:120px;
+            box-shadow: 1px 3px 3px 1px grey;
+    }
+    #showNotice:hover{
+           color:white;
+            background-color: rgb(50, 148, 147);
+    }
+        button:active, 
+        button:hover,
+        button:focus {
+            color:white;
+            background-color: green;
+        }
+        #pageLength{
+        	width: 60%;
+        	height: 60%;
+        	text-align: center;
+        }
+        #searchTitle{
+        width: 95%;
+        height: 60%;
+        padding-left: 10px;
+        }
+        #searchBtnTd{
+		justify-content: left;
+		text-align: left;
+	}
+	#searchBtn{
+		background-color: none;
+		border-radius: 5px;
+		text-align: center;
+		align-items: center;
+		border: none;
+		padding: 5px;
+	}
+		#searchBtn:hover,
+		#searchBtn:active,
+			#searchBtn:focus{
+		background-color: rgb(129, 188, 84);	
+		}
+        #searchBtnTd>#searchBtn>img{
+        width: 25px;
+        }
+        #checkAll{
+            height: 40px;
+            width: 100px;
+            text-align: center;
+            font-family: 'NanumSquareNeo-Variable';
+            font-size: 15px;
+        }
+        .boardMenu {
+            font-family: 'NanumSquareNeo-Variable';
+            height: 40px;
+            width: 150px;
+            font-weight: bold;
+            font-size: 18px;
+            background-color: rgb(129, 188, 84);
+        }
+        #pageNumSpace {
+            text-align: center;
+            height: 50px;
+        }
+        .pageNum{
+        cursor:pointer;
+        font-size: 18px;
+        font-family: 'NanumSquareNeo-Variable';
+        color:gray;
+        width: 50px;
+        border : none;
+        background-color: white;
+    }
+    #showNotice.all {
+    	background-color : rgb(84, 188, 186);
+    }
+
+    #showNotice.notice {
+    	background-color : green;
+    }
+  .boardInfoNum {
+  	background: none;
+  	text-align: center;
+  	border : none;
+     font-family: 'NanumSquareNeo-Variable';
+  	 font-size: 15px;
+  }
+
+    
+  .detailBtn{
+  	width: 85%;
+  	height: 65%;
+  	border-radius: 5px;
+  	border: none;
+  	background-color: rgb(207, 250, 199);
+  	box-shadow: 1px 1px 1px 2px rgb(228, 228, 228);
+  }
+  
+  fieldset>button{
+  	width: 100px;
+  	height: 25px;
+  	border-radius: 5px;
+  }
+  
+  /* 여기서 부터 infocss */
+ 
+ 
+ #dialog-form {
+  text-align: center;
+}
+
+#dialog-form fieldset {
+  border: none;
+  padding: 20px;
+}
+
+#dialog-form label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+#dialog-form input[type="text"],
+#dialog-form input[type="date"],
+#dialog-form input[type="number"] {
+  width: 80%;
+  height: 30px;
+  margin-bottom: 15px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#dialog-form input[type="text"][name="content"] {
+  height: 300px;
+}
+
+/* Hide the submit button */
+#dialog-form input[type="submit"] {
+  display: none;
+}
+#attacheTb {
+    border-collapse: collapse; /* 테두리 겹치기 방지 */
+    width: 100%; /* 테이블 너비 설정 */
+}
+
+#attacheTb td {
+    padding: 5px; /* 셀 내부 여백 설정 */
+    border: 1px solid #ccc; /* 모든 셀의 테두리 스타일 설정 */
+}
+
+#attacheTb tr:first-child td {
+    border-top: none; /* 첫 번째 행의 모든 셀의 상단 테두리 제거 */
+}
+
+#attacheTb tr:last-child td {
+    border-bottom: none; /* 마지막 행의 모든 셀의 하단 테두리 제거 */
+}
+
+#attacheTb td:first-child {
+    border-left: none; /* 각 행의 첫 번째 셀의 왼쪽 테두리 제거 */
+}
+
+#attacheTb td:last-child {
+    border-right: none; /* 각 행의 마지막 셀의 오른쪽 테두리 제거 */
+}
+
+  /* 테이블 셀 스타일 */
+  #attacheTb td {
+    padding: 5px; /* 셀 내부 여백 설정 */
+    border: 1px solid #ccc; /* 셀 테두리 스타일 설정 */
+    height: 30px;
+  }
+
+
+#attacheFile {
+	width: 30%;
+	text-align: center;
+}
+#attacheFileBtn {
+	width : 50%;
+	height: 30px;
+	color : white;
+	font-size: 11px;
+	border: none;
+	background-color: grey;
+	border-radius: 5px;
+}
+##attacheFileInfo {
+	width: 70%;
+}
+
+/* 여기서부터 새글작성 css */
+#dialog-form2 {
+  width: 100%;
+}
+
+#dialog-form2 fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#dialog-form2 label,
+#dialog-form2 input {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+#dialog-form2 input[type="text"] {
+  height: 30px;
+}
+
+#dialog-form2 input[type="date"] {
+  height: 30px;
+}
+
+#dialog-form2 input[type="submit"] {
+  display: none;
+}
+
+#dialog-form2 label {
+  text-align: center;
+}
+
+#dialog-form2 input[type="text"],
+#dialog-form2 input[type="date"],
+#dialog-form2 textarea {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+#dialog-form2 textarea {
+  height: 300px;
+}
+
+#dialog-form2 input[type="text"][name="newcontent"] {
+  height: 300px;
+}
+
+/* Hide the submit button visually */
+#dialog-form2 input[type="submit"] {
+  display: none;
+}
+
+
+/* 답글 작성 폼 스타일 */
+#replyWrite-form {
+  width: 100%;
+}
+
+#replyWrite-form fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#replyWrite-form label,
+#replyWrite-form input,
+#replyWrite-form textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+#replyWrite-form input[type="text"],
+#replyWrite-form input[type="date"] {
+  height: 30px;
+}
+
+#replyWrite-form textarea {
+  height: 300px;
+}
+#replycontent2{
+	height: 300px !important;
+}
+
+/* 첨부 파일 버튼 스타일 */
+#attacheFileBtn {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #f2f2f2;
+  color: #333;
+  border-radius: 5px;
+}
+
+/* 첨부 파일 정보 스타일 */
+#attachFileInfo {
+  padding-left: 10px;
+}
+
+/* 답글 작성 폼의 레이블 스타일 */
+#replyWrite-form label {
+  text-align: center;
+}
+
+/* 숨겨진 제출 버튼을 시각적으로 숨김 */
+#replyWrite-form input[type="submit"] {
+  display: none;
+}
+
+
+
+
+/* 댓글 css */
+/* 댓글 목록 스타일 */
+.comment {
+    margin-bottom: 10px;
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    display: flex !important; /* 댓글 내용과 버튼들을 가로로 정렬 */
+    align-items: left  /* 세로 중앙 정렬 */
+   
+}
+#commentList{
+	text-align: left !important;
+    padding-left: 20px !important;
+}
+
+.comment-id {
+    font-weight: bold;
+    margin-right: 10px;
+    flex: 1; /* 댓글 작성자가 왼쪽에 위치하도록 설정 */
+}
+
+ .comment-content {
+    border: none;
+    background: none;
+    font-size: 14px;
+    width:300px !important;
+    
+    flex: 2; /* 댓글 내용이 더 넓게 표시되도록 설정 */
+}
+
+.comment-regdate {
+    color: #888;
+    font-size: 12px;
+    margin-right: 10px;
+    flex: 1; /* 작성일이 오른쪽에 위치하도록 설정 */
+}
+
+.deleteCommentBtn,
+.modifyCommentBtn {
+    background-color: #caffc4;
+    border-radius:5px;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin:5px;
+}
+
+/* 댓글 입력란 스타일 (옵션) */
+#idSpan {
+	margin: 10px;
+	font-weight: bold;
+    margin-right: 10px;
+}
+#replyContent {
+    margin-top: 20px;
+    display: flex; /* 댓글 입력란과 버튼을 가로로 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+
+}
+
+#reply {
+    flex: 2; /* 댓글 입력란이 더 넓게 표시되도록 설정 */
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+#replyBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+#replyBtn:hover{
+	background: lightblue;
+}
