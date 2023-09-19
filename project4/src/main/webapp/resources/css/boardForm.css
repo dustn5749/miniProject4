@@ -145,6 +145,9 @@
             font-size: 18px;
             background-color: rgb(129, 188, 84);
         }
+        .boardTitle{
+        	width: 300px !important;
+        }
         #pageNumSpace {
             text-align: center;
             height: 50px;
@@ -226,55 +229,84 @@
 #dialog-form input[type="submit"] {
   display: none;
 }
-#attacheTb {
+.attacheTb {
     border-collapse: collapse; /* 테두리 겹치기 방지 */
     width: 100%; /* 테이블 너비 설정 */
+    font-size: 9px;
 }
 
-#attacheTb td {
+.attacheTb td {
     padding: 5px; /* 셀 내부 여백 설정 */
     border: 1px solid #ccc; /* 모든 셀의 테두리 스타일 설정 */
 }
 
-#attacheTb tr:first-child td {
+.attacheTb tr:first-child td {
     border-top: none; /* 첫 번째 행의 모든 셀의 상단 테두리 제거 */
 }
 
-#attacheTb tr:last-child td {
+.attacheTb tr:last-child td {
     border-bottom: none; /* 마지막 행의 모든 셀의 하단 테두리 제거 */
 }
 
-#attacheTb td:first-child {
+.attacheTb td:first-child {
     border-left: none; /* 각 행의 첫 번째 셀의 왼쪽 테두리 제거 */
 }
 
-#attacheTb td:last-child {
+.attacheTb td:last-child {
     border-right: none; /* 각 행의 마지막 셀의 오른쪽 테두리 제거 */
+}
+.upload{
+	width: 20%;
+}
+.uploadBtn{
+	font-size:10px;
+	font-weight: bolder;
+	width: 80%;
+	border: none;
+	border-radius: 5px;
+	background-color: #eeffee;
+	color : black;
+	cursor: pointer;
+	height: 30px;
+	font-size: 10px;
+}
+.uploadBtn:hover{
+	background: #e6fffe;
+	color : black;
 }
 
   /* 테이블 셀 스타일 */
-  #attacheTb td {
+  .attacheTb td {
     padding: 5px; /* 셀 내부 여백 설정 */
     border: 1px solid #ccc; /* 셀 테두리 스타일 설정 */
     height: 30px;
   }
 
 
-#attacheFile {
-	width: 30%;
+.attacheFile {
+	width: 20%;
 	text-align: center;
 }
-#attacheFileBtn {
-	width : 50%;
+.attacheFileBtn {
+	width : 80%;
 	height: 30px;
 	color : white;
 	font-size: 11px;
 	border: none;
 	background-color: grey;
 	border-radius: 5px;
+	cursor: pointer;
+		font-size:10px;
+	font-weight: bolder;
 }
-##attacheFileInfo {
-	width: 70%;
+.attacheFileBtn:hover{
+	background: black;
+}
+.attacheFileInfo {
+	width: 60%;
+}
+.uploadBtn {
+	display: none;
 }
 
 /* 여기서부터 새글작성 css */

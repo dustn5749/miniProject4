@@ -4,10 +4,12 @@ package com.kosa.project4.board.model;
 import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.sql.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +28,7 @@ public class Board   {
 		private int readcount;
 		private int pnum;
 		private int level = 1;
+		private List<AttacheFile> file;
 		
 		//검색 필드
 		private String searchTitle= "";

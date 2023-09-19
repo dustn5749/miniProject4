@@ -13,7 +13,7 @@ public interface BoardDAO {
 		
 	
 	//게시판 추가
-	boolean add(Board board) throws Exception;
+	int add(Board board) throws Exception;
 
 	
 	// 게시판 수정
@@ -37,8 +37,7 @@ public interface BoardDAO {
 	public List<Board> getSearchBoardList(Board board) throws Exception;
 
 
-	// 답글 작성하기
-	boolean writeReplyForm(Board board) throws Exception;
+	
 
 
 

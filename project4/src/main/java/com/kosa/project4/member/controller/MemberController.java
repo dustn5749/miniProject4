@@ -90,9 +90,9 @@ public class MemberController {
 	}
 	
 	// 로그아웃하기
-	@RequestMapping(value="/member/adminlogout.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/logout.do", method=RequestMethod.POST)
 	@ResponseBody
-	public  Map<String, Object> logout(HttpServletRequest  request, HttpServletResponse response) throws Exception {
+	public  Map<String, Object> adminlogout( HttpServletRequest  request, HttpServletResponse response) throws Exception {
 		System.out.println("logout");
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -105,6 +105,7 @@ public class MemberController {
 
 	    return map;
 	}
+	
 	
 	
 	// 아이디찾기
@@ -239,9 +240,9 @@ public class MemberController {
 	
 	
 	// 관리자 로그아웃하기
-	@RequestMapping(value="/member/logout.do", method=RequestMethod.POST)
+	@RequestMapping(value="/member/adminlogout.do", method=RequestMethod.POST)
 	@ResponseBody
-	public  Map<String, Object> adminlogout( HttpServletRequest  request, HttpServletResponse response) throws Exception {
+	public  Map<String, Object> logout(HttpServletRequest  request, HttpServletResponse response) throws Exception {
 		System.out.println("logout");
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -254,7 +255,6 @@ public class MemberController {
 
 	    return map;
 	}
-	
 	
 
 	// 회원탈퇴하기(여러명)

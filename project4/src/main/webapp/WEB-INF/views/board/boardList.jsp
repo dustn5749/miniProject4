@@ -11,11 +11,11 @@
 <link rel="stylesheet" href='<c:url value="/resources/css/boardForm.css"></c:url>'>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  
+ <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
 </head>
 <body>
+
 <div id="container">
 
 <a href='<c:url value="/index/index.do"/>'><img  src=  '<c:url value="/resources/images/logo1.png"/>'  id="logo"></a>
@@ -50,7 +50,7 @@
         </tr>
         <tr>
             <td class="boardMenu">번호</td>
-            <td class="boardMenu">제목</td>
+            <td class="boardMenu boardTitle" >제목</td>
             <td class="boardMenu">작성자</td>
             <td class="boardMenu">작성일</td>
             <td class="boardMenu">조회수</td>
@@ -61,12 +61,10 @@
 		<c:forEach items="${result.boardList}" var="list" >
             <tr >
                 <td class="boardNum"><input class="boardInfoNum" value='<c:out value="${list.boardNum}" />' name="boardNum" readonly="readonly"></td>
-                <td>
+                 <td style="text-align: left">
+                     <span style="padding-left:${(list.level-1)*30}px"></span>
                 	<c:if test="${list.level != 1}">
-                	↪
-                	<c:forEach var="i" begin="1" end="${list.level -1}">
-                		<c:out value="[답글] " />	
-                	</c:forEach>
+                	↪[답글]
                 	</c:if>
            		 <c:out value="${list.title}"></c:out>
                 <td><c:out value="${list.id}" /></td>
@@ -116,6 +114,8 @@
       <input type="date" name="regdate" id="seletedregdate" class="info" disabled="disabled">
        <label for="readcount">조회수</label>
       <input type="text" name="readcount" id="seletedreadcount" class="info" disabled="disabled">
+		<div id="attachFileList"></div>
+      </table>
     <label for="content">내용</label>
       <input type="text" name="content" id="seletedcontent"class="info" disabled="disabled"><br>
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
@@ -138,53 +138,58 @@
 
 
 <div id="dialog-form2" title="게시글 작성하기">
+      <form id="attachForm" enctype="multipart/form-data">
     <fieldset>
       <label for="title">제목</label>
-      <input type="text" name="newtitle" id="newtitle" class="info" >
+      <input type="text" name="title" id="newtitle" class="info" >
       <label for="boardnum">글번호</label>
-      <input type="text" name="newboardnum" id="newboardnum" class="info" disabled="disabled">
+      <input type="text" name="boardNum" id="newboardnum" class="info" readonly="readonly">
+      
       <label for="id">작성자</label>
-      <input type="text" name="newid" id="newid"  class="info" disabled="disabled"><br>
+      <input type="text" name="id" id="newid" value="${loginMembe.uid}" class="info" readonly="readonly"><br>
       <label for="regdate">작성일</label>
-      <input type="date" name="newregdate" id="newregdate" class="info" disabled="disabled">
+      <input type="date" name="regdate" id="newregdate" class="info" disabled="disabled">
        <label for="readcount">조회수</label>
-      <input type="text" name="newreadcount" id="newreadcount" class="info" disabled="disabled">
-      <table id="attacheTb">
+      <input type="text" name="readcount" id="newreadcount" class="info" disabled="disabled">
+      <table class="attacheTb">
       	<tr>
-      		<td  id="attacheFile"><button id="attacheFileBtn">첨부파일</button></td>
-      		<td id="attachFileInfo"></td>
+      		<td  class="attacheFile"><button class="attacheFileBtn">첨부파일</button></td>
+      		<td class="attachFileInfo"><div class="d_file"></div></td>
       	</tr>      	
       </table>
     <label for="content">내용</label>
-     <input type="text" name="newcontent" id="newcontent"class="info" ><br>
+     <input type="text" name="content" id="newcontent"class="info" ><br>
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
     </fieldset>
+      </form>
 </div>
 
 <div id="replyWrite-form" title="답글 작성하기">
     <fieldset>
+    <form id="attachForm2" enctype="multipart/form-data">
       <label for="title">제목</label>
-      <input type="text" name="replytitle" id="replytitle" class="info" >
+      <input type="text" name="title" id="replytitle" class="info" >
       <label for="boardnum">글번호</label>
-      <input type="text" name="replyboardnum" id="replyboardnum" class="info" disabled="disabled">
+      <input type="text" name="boardNum" id="replyboardnum" class="info" disabled="disabled">
       <label for="id">작성자</label>
-      <input type="text" name="replyid" id="replyid"  class="info" disabled="disabled"><br>
+      <input type="text" name="id" id="replyid" value="${loginMembe.uid}  class="info"readonly="readonly"><br>
       <label for="regdate">작성일</label>
       <input type="date" name="replyregdate" id="replyregdate" class="info" disabled="disabled">
        <label for="readcount">조회수</label>
       <input type="text" name="replyreadcount" id="replyreadcount" class="info" disabled="disabled">
+      <input type="hidden" name="pnum" id="replyPboardnum" class="info" >
+      
       <table id="attacheTb">
       	<tr>
-      		<td  id="attacheFile"><button id="attacheFileBtn">첨부파일</button></td>
-      		<td id="attachFileInfo"></td>
+      		<td  class="attacheFile"><button class="attacheFileBtn">첨부파일</button></td>
+      		<td class="attachFileInfo"><div class="d_file"></div></td>
       	</tr>      	
       </table>
     <label for="content">내용</label>
-     <input type="text" name="replycontent2" id="replycontent2"class="info" ><br>
+     <input type="text" name="content" id="replycontent2"class="info" ><br>
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
-      
+    </form>  
     </fieldset>
 </div>
 

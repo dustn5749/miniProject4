@@ -22,7 +22,7 @@
    
    <select id="getSearchBoardList" statementType="CALLABLE">
    	{call board_list(
-   		#{searchTitle} 
+   			#{searchTitle} 
    		, #{StartNo}
    		, #{EndNo}
    		, #{v_cursor, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=boardMap}
@@ -31,27 +31,15 @@
    
    
    
-   <insert id="insertBoard" >
-      <selectKey keyProperty="boardid" resultType="int"  order="BEFORE">
-         select 
-            seq_board.nextval boardid 
-         from dual
-      </selectKey>
-      INSERT INTO board (
-           pid
-         , boardid
-         , title
-         , contents
-         , writer_uid
-         , reg_date
-      ) VALUES (
-           0
-         , #{boardid}
-         , #{title}
-         , #{contents}
-         , #{writer_uid}
-         , sysdate
-      )
+   <insert id="add" statementType="CALLABLE">
+   
+      {CALL INSERT_BOARD(
+      	#{title}
+      	,#{id}
+      	,#{content}
+      	,#{pnum}
+      	,#{v_cursor, mode=OUT  jdbcType=VARCHAR}
+      )}
    </insert>
 
    <select id="getTotalCount" resultType="int">
@@ -114,12 +102,7 @@
       ]]>
    </select>
    
-   <update id="viewCount">
-      update board set 
-         view_count = view_count + 1 
-      where boardId = #{boardId}
-   </update>
-   
+
    <delete id="deleteBoards" >
       delete from board 
       where BOARDNUM in
@@ -128,37 +111,5 @@
       </foreach> 
    </delete>
    
-   <select id="getBoardList2" resultType="Board">
-      select * from (
-         select 
-            level, pid, boardid, step, title, writer_uid, reg_date, view_count
-         from board 
-         where delete_yn = 'N' 
-         <if test="boardid != 0">
-            <![CDATA[
-            and boardid > #{boardid}
-            ]]>
-         </if>
-         start with pid=0
-         CONNECT BY PRIOR boardid = pid
-         order SIBLINGS by boardid desc  
-      ) A 
-      <![CDATA[
-      where rownum <= 10
-      ]]>
-   </select>
-   
-   <select id="getboardListBoforeN">
-       select * from (
-           select * from board
-          <![CDATA[
-           where boardid < #{boardid} 
-          ]]>
-           order by boardid desc
-       ) A
-       <![CDATA[
-       where rownum <= N      
-       ]]>
-   </select>
-   
+
 </mapper>

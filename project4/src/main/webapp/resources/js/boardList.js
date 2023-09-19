@@ -81,39 +81,12 @@ var replyWriteDialog = $("#replyWrite-form").dialog({
 	height: 600,
 	width: 700,
 	buttons:{
-		작성하기 : wirteReply
+		작성하기 : addBoard2
 	}
 })
 
-// 답글 작성하기
-function wirteReply() {
-	var send = {
-			title : $("#replytitle").val(),
-			id : $("#replyid").val(),
-			content : $("#replycontent").val(),
-			pnum : $("#seletedboardnum").val()
-	}
-	
-	console.log(send);
-	
-	$.ajax({
-		url : "/project4/board/writeReplyForm.do",
-		 type: 'POST',
-	     contentType: "application/json; charset=UTF-8",
-	     data: JSON.stringify(send),
-	     dataType: "json",
-	     success: function (data) {
-	    	 if(data.result){
-	    		 alert("답글 작성이 완료되었습니다.");
-	    		 updateData();
-	    		 replyWriteDialog.dialog("close");
-	    	 }
-	     }
-	})
-}
 
-
-//페이지 데이터 가져오기
+// 페이지 데이터 가져오기
 function updateData() {
   var pageNo = $("#pageNo2").val();
   var send = {
@@ -137,11 +110,24 @@ function updateData() {
                   var row = $("<tr></tr>");
                   
                   row.append("<td class='boardNum'><input class='boardInfoNum' value='" + board.boardNum + "' name='boardNum' readonly='readonly'></td>");
-                  row.append("<td>" + board.title + "</td>");
+                  // 레벨에 따라 들여쓰기를 추가
+                  row.append("<td style='text-align: left'><span style='padding-left:" + (board.level - 1) * 30 + "px'></span>");
+                  if (board.level != 1) {
+                      row.find("td:last").append("↪[답글]");
+                  }
+                  // 게시글 제목을 추가
+                  row.find("td:last").append(board.title + "</td>");
                   row.append("<td>" + board.id + "</td>");
                   row.append("<td>" + board.regdate + "</td>");
                   row.append("<td>" + board.readcount + "</td>");
-                  row.append("<td><button class='detailBtn'>상세보기</button></td>");
+                  
+                  // 상세보기 버튼 추가 및 클릭 이벤트 처리
+                  var detailBtn = $("<button class='detailBtn'>상세보기</button>");
+                  detailBtn.click(function () {
+                      // 상세보기 동작을 여기에 추가
+                      // 예: 상세보기 모달 띄우기 등
+                  });
+                  row.append($("<td></td>").append(detailBtn));
 
                   listArea.append(row);
               });
@@ -175,7 +161,7 @@ $("#newBoard").click(function(){
 // 로그인 체크 
 function loginCheck(){
    console.log("로그인체크 ");
-   
+  
    $.ajax({
 	   url : "/project4/member/loginCheck.do",
        type: "POST",
@@ -204,55 +190,77 @@ function loginCheck(){
   
 }
 
-// 첨부파일 추가하기
-$("#attacheFileBtn").on("click", function() {
-	var send = {
-			
-	}
-	$.ajax ({
-		url : "/project4/uploadFile/insertFile.do",
-		type:'POST',
-		dataType : "json",
-        contentType: "application/json; charset=utf-8",
+// 첨부파일 버튼 추가하기
+function attachFileBehavior() {
+	var cnt = 1;
+    $(".d_file").append("<br>" + "<input type='file'  name='file" + cnt++ +"' id='fileUpload'/>");
+    }
 
-		success: function(data) {
-			if(data.result){
-				$("#attachFileInfo").html(data.attacheFile.fileNameReal);
+
+// 게시글 작성하기(새글 추가)
+function addBoard() {
+	 var attachForm = $("#attachForm")[0];
+	 var formData = new FormData(attachForm);	    
+	 var option = {
+			    method: 'POST',
+			    body: formData
 			}
-		}
-	})
-})
+	
+	   fetch("/project4/board/boardInsert.do", option)
+	    .then(response => response.json())
+	    .then(data => {
+	    	console.log("step4");
+	    	if (data.result) {
+	    		alert("게시글이 성공적으로 작성되었습니다");
+	    		updateData();
+	    		wirteDialog.dialog("close");
+	    		
+	    	} else {
+	    		alert("게시글 작성에 실패하였습니다");
+	    	}
+	    });
+
+}
 
 
-// 게시글 추가하기(새글 작성)
-   function addBoard(){
-	   var page = $("#pageNo1").val(); 
+// 답글 추가하기
+function addBoard2() {
+	 var attachForm = $("#attachForm2")[0];
+	
+	 var formData = new FormData(attachForm);	    
+	 var option = {
+			    method: 'POST',
+			    body: formData
+			}
+	
+	   fetch("/project4/board/boardInsert2.do", option)
+	    .then(response => response.json())
+	    .then(data => {
+	    	console.log("step4");
+	    	if (data.result) {
+	    		alert("게시글이 성공적으로 작성되었습니다");
+	    		updateData();
+	    		replyWriteDialog.dialog("close");
+	    		
+	    	} else {
+	    		alert("게시글 작성에 실패하였습니다");
+	    	}
+	    });
 
-        var sendData={
-			id:  $("#writerId").val(),
-			title:$("#newtitle").val(),
-			content:$("#newcontent").val()
-		};
-      
-      if($("#newtitle").val() !==""){
-		    $.ajax({
-			url : "/project3/board/insertBoard.do",
-			type: 'POST',
-            data: JSON.stringify(sendData),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function(data) {
-                if (data.result) {
-                    alert("게시판 등록이 완료되었습니다.");
-                    	jsPageNo(page);         
-                
-                } 
-             }
-	  })
-	  } else {
-		  alert("제목을 입력해주세요.");
-	  }
-   }
+}
+
+$("#dialog-form2, #replyWrite-form").on("click", ".attacheFileBtn", function (e) {
+	 e.preventDefault(); 
+	attachFileBehavior();
+});
+
+
+
+$("#dialog-form2, #replyWrite-form").on("click", ".uploadBtn", function (e) {
+	uploadFile(e)
+});
+
+
 
 function reload(){
 	var empty = "";
@@ -375,6 +383,7 @@ $(document).on("click", ".detailBtn", function() {
                 $("#seletedtitle").val(data.board.title);
                 $("#seletedid").val(data.board.id);
                 $("#seletedboardnum").val(data.board.boardNum);
+                $("#replyPboardnum").val(data.board.boardNum);
                 $("#seletedregdate").val(data.board.regdate);
                 $("#seletedcontent").val(data.board.content);
                 $("#seletedreadcount").val(data.board.readcount);

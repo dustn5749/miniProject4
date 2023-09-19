@@ -95,7 +95,7 @@ public class NoticeController {
 	// 새글 작성하기
 	@RequestMapping(value="/notice/insertNotice.do", method=RequestMethod.POST )
 	@ResponseBody
-	public Map<String, Object> insertNotice(@RequestBody Notice notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public Map<String, Object> insertNotice( Notice notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("insertNotice()");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {

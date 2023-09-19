@@ -25,16 +25,29 @@ public class BoardDAOImpl implements BoardDAO {
 	@Autowired
 	private  SqlSession sqlSession;
 	
+	// 게시판 추가하기
 	@Override
-	public boolean add(Board board) throws Exception {
-		return false;
+	public int add(Board board) throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		System.out.println("BoardImpl = " + board);
+	
+		map.put("title", board.getTitle());
+		map.put("id", board.getId());
+		map.put("content", board.getContent());
+		map.put("pnum", board.getPnum());
+		sqlSession.insert("mapper.board.add", map);
+		String result = (String) map.get("v_cursor");
+		System.out.println("result = " + result);
+		return Integer.parseInt(result);
 	}
-
+	
+	// 게시판 수정하기
 	@Override
 	public boolean update(Board board) throws Exception {
 		return false;
 	}
-
+	
+	//게시판 정보 가져오기
 	@Override
 	public Board getBoard(int boardNum) throws Exception {
 		return sqlSession.selectOne("mapper.board.getBoard", boardNum);
@@ -73,13 +86,5 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 	
-	// 답글작성하기
-	@Override
-	public boolean writeReplyForm(Board board) throws Exception {
-		System.out.println("BoardDAOImpl.writeReplyForm()");
-		return false;
-	}
-
-
 
 } 
