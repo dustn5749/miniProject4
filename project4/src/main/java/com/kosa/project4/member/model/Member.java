@@ -20,6 +20,7 @@ public class Member implements Serializable {
 	private String pwd;
 	private String name;
 	private String phone;
+	private String email;
 	
 	// 삭제할 멤버 리스트
 	private String[]  uids;

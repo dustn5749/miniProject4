@@ -85,5 +85,13 @@ public class CommentDAOImpl implements CommentDAO {
 		return Integer.parseInt(result);
 	}
 
+	// 댓글 여러개 삭제
+	@Override
+	public boolean deletes(int[] deletePnum) throws Exception {
+		System.out.println("CommentDAOImpl.deletes()");
+		
+		return sqlSession.delete("mapper.comment.deletes", deletePnum) != 0;
+	}
+
 
 }

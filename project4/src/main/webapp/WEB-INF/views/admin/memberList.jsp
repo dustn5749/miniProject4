@@ -10,8 +10,9 @@
     <meta charset="UTF-8">
     <title>회원 정보 상세보기</title>
     <link rel="stylesheet" href='<c:url value="/resources/css/memberlist.css"></c:url>'>
-     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 </head>
 <body>
 <script>
@@ -64,29 +65,31 @@
                   </tr>       
      	
     </table>
-    <div id="btnDiv">
-   <a id="homeBtn" href='<c:url  value="/admin.do"/>'>홈으로가기</a>    
-    </div>
+	
+	<div id="pageIndex">
+	    <c:if test="${result.member.navStart != 1}">
+	        <span class="pageLink" onclick="jsPageNo(${result.member.navStart - 1}); return false;" style="padding: 10px;"> &lt; </span>
+	    </c:if>
+	    
+	    <c:forEach var="item" begin="${result.member.navStart}" end="${result.member.navEnd}">
+	        <c:choose>
+	            <c:when test="${result.member.pageNo != item}">
+	                <span class="pageLink" onclick="jsPageNo(${item}); return false;" style="padding: 10px; margin: 0 auto; text-align: center;">${item}</span>
+	            </c:when>
+	            <c:otherwise>
+	                <span class="pageLink activePage"  style="padding: 10px; margin: 0 auto; text-align: center;"  onclick="jsPageNo(${item})">${result.member.pageNo}</span>
+	            </c:otherwise>
+	        </c:choose>
+	    </c:forEach>
+	    <c:if test="${result.member.navEnd != result.member.totalPageSize}">
+	        <a href="#" onclick="jsPageNo(${result.member.navEnd + 1}); return false;"></a>
+	    </c:if>
+	</div>
+
+
+
 </div>
 
-<div id="pageIndex">
-    <c:if test="${result.member.navStart != 1}">
-        <span class="pageLink" onclick="jsPageNo(${result.member.navStart - 1}); return false;" style="padding: 10px;"> &lt; </span>
-    </c:if>
-    <c:forEach var="item" begin="${result.member.navStart}" end="${result.member.navEnd}">
-        <c:choose>
-            <c:when test="${result.member.pageNo != item}">
-                <span class="pageLink" onclick="jsPageNo(${item}); return false;" style="padding: 10px; margin: 0 auto; text-align: center;">${item}</span>
-            </c:when>
-            <c:otherwise>
-                <span class="pageLink activePage" style="padding: 10px; margin: 0 auto; text-align: center;">${result.member.pageNo}</span>
-            </c:otherwise>
-        </c:choose>
-    </c:forEach>
-    <c:if test="${result.member.navEnd != result.member.totalPageSize}">
-        <a href="#" onclick="jsPageNo(${result.member.navEnd + 1}); return false;"></a>
-    </c:if>
-</div>
 
 </body>
 <script src='<c:url value="/resources/js/memberlist.js"></c:url>'>

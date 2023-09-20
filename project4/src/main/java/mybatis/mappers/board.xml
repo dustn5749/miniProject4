@@ -80,28 +80,15 @@
       )
    </insert>
    
-   <update id="updateBoard">
+   <update id="update">
       update board set 
            title=#{title}
-         , contents=#{contents} 
-      where boardid=#{boardid}
+         , content=#{content}
+      where BOARDNUM=#{boardNum}
    </update>
    
  
-   <select id="boardTop5" resultType="Board">
-      <![CDATA[
-         select 
-            rownum, sub.*  
-         from (
-            select 
-               * 
-            from board 
-            order by board.boardid desc
-         ) sub 
-         where rownum <=5
-      ]]>
-   </select>
-   
+
 
    <delete id="deleteBoards" >
       delete from board 
@@ -110,6 +97,22 @@
          #{boardnum}      
       </foreach> 
    </delete>
-   
 
+
+   <delete id="deleteReplyBoards" >
+      delete from board 
+      where PNUM in
+      <foreach item="boardnum" collection="array"  open="("  separator="," close=")"> 
+         #{boardnum}      
+      </foreach> 
+   </delete>
+      
+   <select id="getWriter" resultType="String">
+   	select id 
+   	from board
+   	where BOARDNUM=#{pnum}
+   </select>
+
+
+	
 </mapper>

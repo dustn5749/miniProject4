@@ -34,6 +34,11 @@ public class CommentService {
 	public  boolean delete(int boardnum) throws Exception{
 		return commentDao.delete(boardnum);
 	}
+	
+	// 댓글 여러개 삭제
+	public boolean deletes(int[] deletePnum) throws Exception{
+		return commentDao.deletes(deletePnum);
+	}
 
 	//댓글 수정하기
 	public  boolean update(Comment comment)  throws Exception{

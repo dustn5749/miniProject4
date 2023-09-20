@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.kosa.project4.board.model.AttacheFile;
 import com.kosa.project4.board.model.Board;
+import com.kosa.project4.board.service.AttacheFileService;
 import com.kosa.project4.board.service.BoardService;
 import com.kosa.project4.comment.model.Comment;
 import com.kosa.project4.comment.service.CommentService;
@@ -39,11 +40,18 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 	
-	@Autowired
-	private MemberService memberService;
+	 @Autowired 
+	 private MemberService memberService;
+	
 	
 	@Autowired
 	private CommentService commentService;
+	
+	@Autowired
+	private AttacheFileService attacheFileService;
+	
+	@Autowired
+	private MailService mailService;
 	
 	
 	private static final String CURR_IMAGE_REPO_PATH = "C:\\file_repo";
@@ -54,7 +62,10 @@ public class BoardController {
 	public String boardList(Board board, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("list()");
 		try {
-			request.setAttribute("result", boardService.getBoardPageList( board));
+
+			System.out.println("list.board = " + board);
+			System.out.println("boardList = " + boardService.getBoardPageList(board));
+			request.setAttribute("result", boardService.getBoardPageList(board));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -103,12 +114,17 @@ public class BoardController {
 		boardService.upReadCount(board.getBoardNum());
 	    Board seletedBoard = boardService.getBoard(board.getBoardNum());
 	    System.out.println("selecteBOARD = " + seletedBoard);
+	    List<AttacheFile> fileList = attacheFileService.getFiles(board.getBoardNum());
+	    
 	    if(seletedBoard != null) {
 	    	map.put("result", true);
 	    	
 	    	map.put("board", seletedBoard); 
 	    	map.put("commentList", commentService.getCommentList(board.getBoardNum(), comment)); 
 	    	map.put("commentLength", commentService.totalComment(board.getBoardNum()));
+	    	if(fileList != null) {
+	    		map.put("attacheFile", fileList);
+	    	}
 	    	
 	    } else {
 	    	map.put("result", false);
@@ -162,7 +178,7 @@ public class BoardController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 	
-		request.setCharacterEncoding("utf-8");
+		 request.setCharacterEncoding("utf-8"); 
 
 		
 	      String id = request.getParameter("id");
@@ -174,6 +190,11 @@ public class BoardController {
 	      board.setTitle(title);
 	      board.setContent(content);
 	      board.setPnum(Integer.parseInt(pnum));
+	      System.out.println("board = " + board);
+	      
+	      String email = memberService.getEmail(boardService.getWriter(board.getPnum()));
+	      System.out.println("email = " + email);
+	      mailService.sendMail(email, board.getPnum());
 	      
 	      
 		Enumeration enu=request.getParameterNames();
@@ -234,11 +255,50 @@ public class BoardController {
 		System.out.println("deleteBoards()");
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("result", boardService.deletes(board.getDeleteNumList()));
+		commentService.deletes(board.getDeleteNumList());
+		attacheFileService.deletes(board.getDeleteNumList());
+		System.out.println("map = " + map);
 		return map;		
 	}	
 	
 	
 	//게시글 수정하기
-	
+	@ResponseBody
+	@RequestMapping("/board/boardUpdate.do")
+	public Map<String, Object> boardUpdate(MultipartHttpServletRequest request) throws Exception{
+		System.out.println("boardUpdate()");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		request.setCharacterEncoding("utf-8");
 
+		  String boardNum = request.getParameter("boardnum");
+	      String id = request.getParameter("id");
+	      String title = request.getParameter("title");
+	      String content = request.getParameter("content");
+	      Board board = new Board();
+	      board.setBoardNum(Integer.parseInt(boardNum));
+	      board.setId(id);
+	      board.setTitle(title);
+	      board.setContent(content);
+	      
+	      Enumeration enu=request.getParameterNames();
+	     
+	      
+	      while(enu.hasMoreElements()){
+			String name=(String)enu.nextElement();
+			String value=request.getParameter(name);
+			map.put(name,value);
+		}
+		System.out.println("map = " + map.toString());
+		board.setFile(fileProcess(request));
+		
+		boolean result = boardService.update(board);
+		Board updateBoard = boardService.getBoard(board.getBoardNum());
+	
+  	  	resultMap.put("result", result);	
+		resultMap.put("board", updateBoard);	
+		return resultMap;		
+	}	
 }

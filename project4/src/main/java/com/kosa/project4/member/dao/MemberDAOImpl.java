@@ -54,7 +54,9 @@ public class MemberDAOImpl implements MemberDAO {
 	// 회원 정보 수정하기
 	@Override
 	public int update(Member member) throws Exception {
-		sqlSession.update("mapper.member.update", member);
+		System.out.println("memeberDAOImpl.update()");
+		System.out.println(member);
+		
 		return sqlSession.update("mapper.member.existUid", member);
 	}
 
@@ -105,6 +107,16 @@ public class MemberDAOImpl implements MemberDAO {
 	public boolean delete(String[] deleteLists) throws Exception {
 		System.out.println("deletelists  = " + deleteLists.toString());
 	    return sqlSession.delete("mapper.member.deleteMembers", deleteLists) != 0;
+	}
+
+	// 이메일 가져오기
+	@Override
+	public String getEmail(String user) throws Exception {
+		System.out.println("MemberDAOImpl.getEmail()");
+		String email =sqlSession.selectOne("mapper.member.getEmail", user);
+		System.out.println("user.getEmail = " + user);
+		System.out.println("email = " + email);
+		return email;
 	}
 
 }

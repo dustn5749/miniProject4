@@ -22,5 +22,6 @@ public interface MemberDAO {
 		Member login(Member member) throws Exception;
 		boolean deleteOne(Member member) throws Exception;
 		int getTotalCount(Member member) throws Exception;
+		String getEmail(String user) throws Exception;
 	
 }

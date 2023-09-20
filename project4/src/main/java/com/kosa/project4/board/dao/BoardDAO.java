@@ -36,9 +36,11 @@ public interface BoardDAO {
 	// 검색된 리스트 출력
 	public List<Board> getSearchBoardList(Board board) throws Exception;
 
+	// 글 작성자 가져오기
+	String getWriter(int pnum) throws Exception;
 
-	
-
+	// 부모글 삭제에 따른 자식글 삭제
+	boolean deleteReplyBoards(int[] deleteLists) throws Exception;
 
 
 

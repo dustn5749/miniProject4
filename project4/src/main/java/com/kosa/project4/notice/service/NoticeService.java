@@ -58,4 +58,8 @@ public class NoticeService {
 		System.out.println("NoticeService.add(notice)");
 		return noticeDAO.add(notice);
 	}
+
+	public Object getTop5Notice() {
+		return null;
+	}
 }

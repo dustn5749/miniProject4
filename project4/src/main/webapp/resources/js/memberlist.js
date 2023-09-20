@@ -2,18 +2,6 @@ var selectBtn = document.querySelector("#checkDelete");
 var homeBtn = document.querySelector("#homeBtn");
 
 
-// 버튼위로 마우스 올릴 시 색 변화
-	homeBtn.onmouseover = ()=>{
-		homeBtn.style.color = "white";
-		homeBtn.style.backgroundColor = "rgb(62, 164, 54)";
-	}
-	
-	// 마우스가 버튼 밖으로 나갈 시 색 변화
-	homeBtn.onmouseout =()=>{
-		homeBtn.style.color = "";
-		homeBtn.style.backgroundColor = "";
-	}
-
 
 	var allTermsCheck = document.querySelector("#allTermsCheck");
 	var checkTerms = document.querySelectorAll(".checkTerms");
@@ -110,12 +98,11 @@ function jsPageNo(pageNo){
 	      dataType: "json",
 	      success: function (data) {
 	    	var memberList = data.memberList;
-	        var tbody = $("#memberList");
+	        var tbody = $(".container #memberList");
 	        tbody.empty();
 	        
 	        $.each(memberList, function (index, member) {
 	            var row = $("<tr class='memberTr'></tr>");
-
 	            row.append("<td><input type='checkbox' class='checkTerms'></td>");
 	            row.append("<td>" + (index + 1) + "</td>");
 	            row.append("<td class='memberName'>" + member.name + "</td>");

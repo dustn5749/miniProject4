@@ -44,7 +44,7 @@ public class BoardDAOImpl implements BoardDAO {
 	// 게시판 수정하기
 	@Override
 	public boolean update(Board board) throws Exception {
-		return false;
+		return 	sqlSession.update("mapper.board.update", board) != 0;
 	}
 	
 	//게시판 정보 가져오기
@@ -79,12 +79,31 @@ public class BoardDAOImpl implements BoardDAO {
 		map.put("StartNo", board.getStartNo());
 		map.put("EndNo", board.getEndNo());
 		map.put("searchTitle", board.getSearchTitle());
+		System.out.println(map);
 		List<Board> BoardList = new ArrayList<Board>(); 
 		sqlSession.selectList("mapper.board.getSearchBoardList", map);
 		BoardList = (List<Board>) map.get("v_cursor");
 		return BoardList;
 		
 	}
+	// 글 작성자 가져오기
+	@Override
+	public String getWriter(int pnum) throws Exception {
+		System.out.println("BoardDAOImpl.getWriter()");
+		String user =sqlSession.selectOne("mapper.board.getWriter", pnum);
+		System.out.println("user = " + user);
+		return user; 
+	}
+
+	// 부모글 삭제에 따른 자식글 삭제
+	@Override
+	public boolean deleteReplyBoards(int[] deleteLists) throws Exception {
+		System.out.println("BoardDAOImpl.deleteReplyBoards()");
+		
+		return sqlSession.delete("mapper.board.deleteReplyBoards", deleteLists) !=0;
+	}
+
+
 	
 
 } 

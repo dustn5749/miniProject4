@@ -108,6 +108,12 @@ public class MemberService {
 		return memberDAO.deleteOne(member);
 	}
 
+	// 회원의 이메일 가져오기
+	public String getEmail(String user) throws Exception{
+		System.out.println("MemberService.getEmail()");
+		return memberDAO.getEmail(user);
+	}
+
 
 
 }

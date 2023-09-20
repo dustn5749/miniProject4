@@ -18,7 +18,7 @@ public class BoardService {
 	@Autowired
 	private BoardDAO boardDAO;
 	@Autowired
-	private AttacheFileDAO attacheFileDAO;
+	private AttacheFileService attacheFileService;
 	
 	// 게시글 페이징 리스트 가져오기
 	public Map<String, Object> getBoardPageList(Board board) throws Exception {
@@ -29,6 +29,7 @@ public class BoardService {
 		
 		result.put("board", board);
 		result.put("boardList", boardDAO.getSearchBoardList(board));
+		System.out.println("result = " + result);
 		return result;
 	}
 
@@ -53,7 +54,7 @@ public class BoardService {
 		int boardNum = boardDAO.add(board);
 		for(AttacheFile file : board.getFile()) {
 			file.setBoardNum(boardNum);
-			attacheFileDAO.add(file);
+			attacheFileService.add(file);
 			
 		}
 		if(boardNum != 0) {
@@ -65,8 +66,40 @@ public class BoardService {
 	// 게시글 삭제하기
 	public boolean deletes(int[] deleteLists) throws Exception {
 		System.out.println("BoareService.deletes(Board board)");
-		return boardDAO.deleteBoards(deleteLists);
+		 boolean rs1 = boardDAO.deleteBoards(deleteLists);
+		 boolean rs2 = boardDAO.deleteReplyBoards(deleteLists);
+		 System.out.println("rs1 = " + rs1 + ", rs2 = " + rs2);
+//		 boolean result = false;
+//		 if(rs1) {
+//			 if(rs2) {
+//				result = true;
+//			 }
+//		 }
+		 return rs1;
 	}
+
+	// 작성자가져오기
+	public String getWriter(int pnum) throws Exception{
+		System.out.println("BoareService.getWriter(Board board)");
+		return boardDAO.getWriter(pnum);
+	}
+	
+	// 게시판 수정하기
+	public boolean update(Board board) throws Exception {
+		System.out.println("BoareService.update(Board board)");
+		
+		attacheFileService.delete(board.getBoardNum());
+		for(AttacheFile file : board.getFile()) {
+			
+			file.setBoardNum(board.getBoardNum());
+			attacheFileService.add(file);
+
+		}
+		
+		return boardDAO.update(board);
+	}
+
+
 
 
 	

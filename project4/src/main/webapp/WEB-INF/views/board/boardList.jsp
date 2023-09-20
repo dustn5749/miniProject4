@@ -21,7 +21,7 @@
 <a href='<c:url value="/index/index.do"/>'><img  src=  '<c:url value="/resources/images/logo1.png"/>'  id="logo"></a>
 <table id="content-boardList">
         <tr>
-            <td id="boardListTitle" colspan="5">게시판 목록</td>
+            <td id="boardListTitle" colspan="6">게시판 목록</td>
         </tr>
         <tr>
            <form name="pageForm" id="pageForm" action="<c:url value='/board/list.do'/>" method="post" >
@@ -104,20 +104,26 @@
     </div>
   <div id="dialog-form" title="게시글 정보">
     <fieldset>
+  	<form id="updateForm"  enctype="multipart/form-data">
       <label for="title">제목</label>
-      <input type="text" name="title" id="seletedtitle" class="info" disabled="disabled">
+      <input type="text" name="title" id="seletedtitle" class="info" readonly="readonly">
       <label for="boardnum">글번호</label>
-      <input type="text" name="boardnum" id="seletedboardnum" class="info" disabled="disabled">
+      <input type="text" name="boardnum" id="seletedboardnum" class="info" readonly="readonly">
       <label for="id">작성자</label>
-      <input type="text" name="id" id="seletedid"  class="info" disabled="disabled"><br>
+      <input type="text" name="id" id="seletedid"  class="info" readonly="readonly"><br>
       <label for="regdate">작성일</label>
-      <input type="date" name="regdate" id="seletedregdate" class="info" disabled="disabled">
+      <input type="date" name="regdate" id="seletedregdate" class="info" readonly="readonly">
        <label for="readcount">조회수</label>
-      <input type="text" name="readcount" id="seletedreadcount" class="info" disabled="disabled">
-		<div id="attachFileList"></div>
+      <input type="text" name="readcount" id="seletedreadcount" class="info" readonly="readonly">
+       <label for="attachFile">첨부파일</label>
+       	<div id="fileBtn"></div>
+       <div id="seletedattachFile" style='font-size:8px; align-items: left'></div>
+		<div class="result_images"></div>
+		<div id="fileDelete"></div>
       </table>
     <label for="content">내용</label>
-      <input type="text" name="content" id="seletedcontent"class="info" disabled="disabled"><br>
+      <input type="text" name="content" id="seletedcontent"class="info" readonly="readonly"><br>
+    </form>
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
     <hr>
@@ -148,13 +154,11 @@
       <label for="id">작성자</label>
       <input type="text" name="id" id="newid" value="${loginMembe.uid}" class="info" readonly="readonly"><br>
       <label for="regdate">작성일</label>
-      <input type="date" name="regdate" id="newregdate" class="info" disabled="disabled">
-       <label for="readcount">조회수</label>
-      <input type="text" name="readcount" id="newreadcount" class="info" disabled="disabled">
+      <input type="date" name="regdate" id="newregdate" class="info" readonly="readonly">
       <table class="attacheTb">
       	<tr>
       		<td  class="attacheFile"><button class="attacheFileBtn">첨부파일</button></td>
-      		<td class="attachFileInfo"><div class="d_file"></div></td>
+      		<td class="attachFileInfo"><div class="d_file" ></div></td>
       	</tr>      	
       </table>
     <label for="content">내용</label>
@@ -174,12 +178,11 @@
       <label for="id">작성자</label>
       <input type="text" name="id" id="replyid" value="${loginMembe.uid}  class="info"readonly="readonly"><br>
       <label for="regdate">작성일</label>
-      <input type="date" name="replyregdate" id="replyregdate" class="info" disabled="disabled">
-       <label for="readcount">조회수</label>
-      <input type="text" name="replyreadcount" id="replyreadcount" class="info" disabled="disabled">
+      <input type="date" name="replyregdate" id="replyregdate" class="info" readonly="readonly">
+     
       <input type="hidden" name="pnum" id="replyPboardnum" class="info" >
       
-      <table id="attacheTb">
+      <table class="attacheTb">
       	<tr>
       		<td  class="attacheFile"><button class="attacheFileBtn">첨부파일</button></td>
       		<td class="attachFileInfo"><div class="d_file"></div></td>

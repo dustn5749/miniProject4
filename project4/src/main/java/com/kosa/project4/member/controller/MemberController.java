@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosa.project4.board.model.Board;
+import com.kosa.project4.board.service.BoardService;
 import com.kosa.project4.member.model.Member;
 import com.kosa.project4.member.service.MemberService;
 import com.kosa.project4.notice.dao.NoticeDAO;
@@ -28,6 +29,8 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 
+	@Autowired
+	private BoardService boardService;
 	// 아이디 중복 검사
 	@RequestMapping(value="/member/existUid.do", method=RequestMethod.POST)
 	@ResponseBody
@@ -99,7 +102,7 @@ public class MemberController {
 	    HttpSession session = request.getSession();
 
 	    // 세션을 무효화하여 로그아웃 처리
-	    session.invalidate();
+	    session.removeAttribute("loginMember");
 	    
 	    map.put("result", true);	    	
 
@@ -172,6 +175,12 @@ public class MemberController {
 	    	updateMember.setPhone(loginMember.getPhone());
 	    }
 	    
+	    if(member.getEmail() !="") {
+	    	updateMember.setEmail(member.getEmail());
+	    } else {
+	    	updateMember.setEmail(loginMember.getEmail());
+	    }
+	    
 	    
 		if(memberService.updateMember(updateMember) != 0) {
 			map.put("result", true);
@@ -190,6 +199,7 @@ public class MemberController {
 	    System.out.println("delete");
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("result", memberService.delete(member));
+	   
 	    session.invalidate();
 	    return map;
 	}
@@ -249,7 +259,7 @@ public class MemberController {
 	    HttpSession session = request.getSession();
 
 	    // 세션을 무효화하여 로그아웃 처리
-	    session.invalidate();
+	    session.removeAttribute("admin");
 	    
 	    map.put("result", true);	    	
 
@@ -264,7 +274,6 @@ public class MemberController {
 	    System.out.println("deleteMembers");
 	    Map<String, Object> map = new HashMap<String, Object>();
 	    map.put("result", memberService.deleteMember(member.getUids()));
-  	
 	    return map;
 	}
 

@@ -47,5 +47,13 @@
  		, #{p_outmsg, mode=OUT, jdbcType=VARCHAR}
  	)}
  </select>
+ 
+ <delete id="deletes">
+  delete from reply 
+      where PARENTNUM in
+      <foreach item="boardnum" collection="array"  open="("  separator="," close=")"> 
+         #{boardnum}      
+      </foreach> 
+ </delete>
 
 </mapper>

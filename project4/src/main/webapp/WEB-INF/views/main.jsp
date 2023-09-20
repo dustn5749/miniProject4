@@ -11,10 +11,12 @@
         var pwd = "<c:out value='${loginMember.pwd}'/>";
         var name = "<c:out value='${loginMember.name}'/>";
         var phone = "<c:out value='${loginMember.phone}'/>";
+        var email = "<c:out value='${loginMember.email}'/>";
         $("#mypageId").val(uid);
         $("#mypageName").val(name);
         $("#mypagePwd").val(pwd);
         $("#mypagePhone").val(phone);
+        $("#mypageEmail").val(email);
     };
         
 </script>
@@ -36,14 +38,20 @@
             <input type="radio" id="tab2" name="tabs">
             <label for="tab2">갤러리</label>      
             <div id="notice" class="tabContent">
-              <ul>         
+              <ul>  
+              <c:choose>
+            <c:when test="${empty top5List}">
+            	검색 결과가 없습니다
+            </c:when>  
+			<c:otherwise>                    
               <c:forEach items="${top5List}" var="list"> 
                 <li><a class="top5List">
                 [<span class="top5boardNum"><c:out  value="${list.boardNum}"/></span>]  <span class="top5boardTitle"><c:out  value="${list.title}"/></span> 
                 </a></li>                     
                 <input type="hidden" value='<c:url value="/notice/detail.do"></c:url>' class="hiddenNum">
-              </c:forEach>   
-
+              </c:forEach>
+              </c:otherwise>   
+			</c:choose>
               </ul>
             </div>
             <div id="gallery" class="tabContent">
@@ -128,6 +136,8 @@
                 <label for="phone">전화번호:</label>
                 <input type="tel" id="phone" name="phone" placeholder="전화번호" required><br><br>
 
+                <label for="email">이메일:</label>
+                <input type="text" id="email" name="email" placeholder="이메일" required><br><br>
                 <!-- 동의사항 -->
                 <table>
                     <tr class="inputTr">
@@ -233,6 +243,9 @@
 	
 	        <label for="mypagePhone">핸드폰 번호 : </label>
 	        <input type="text" name="mypagePhone" id="mypagePhone" class="input-field" disabled="disabled"><br><br>
+	     
+	        <label for="mypageEmail">이메일 : </label>
+	        <input type="text" name="mypageEmail" id="mypageEmail" class="input-field" disabled="disabled"><br><br>
 	    </fieldset>
 	</div>
 

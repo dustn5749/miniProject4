@@ -8,7 +8,7 @@
 	<select id="getList" resultType="AttacheFile">
 		select 
 			  fileNo			fileNo
-			, boardId			BOARDNUM
+			, BOARDNUM			BOARDNUM
 			, file_Name_Org 	fileNameOrg
 			, file_Name_real 	fileNameReal
 			, length			length	
@@ -51,4 +51,19 @@
 			, #{contentType }	
 		)
 	</insert>
+	
+	<delete id="delete">
+	delete from attach_file
+	where boardnum=#{boardNum}
+	
+	</delete>
+	
+	   <delete id="deletesFile" >
+      delete from attach_file 
+      where BOARDNUM in
+      <foreach item="boardnum" collection="array"  open="("  separator="," close=")"> 
+         #{boardnum}      
+      </foreach> 
+   </delete>
+	
 </mapper>

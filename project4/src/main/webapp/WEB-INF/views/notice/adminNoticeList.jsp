@@ -17,13 +17,12 @@
 </head>
 <body>
 <div id="container">
-<a href='<c:url value="/admin.do"/>'><img  src=  '<c:url value="/resources/images/logo1.png"/>'  id="logo"></a>
  <table id="content-boardList">
         <tr>
-            <td id="boardListTitle" colspan="5">공지사항 목록</td>
+            <td id="boardListTitle" colspan="7">공지사항 목록</td>
         </tr>
         <tr>
-           <form name="pageForm" id="pageForm" action="<c:url value='/notice/list.do'/>" method="post" >
+           <form name="pageForm" id="pageForm" action="<c:url value='/notice/adminList.do'/>" method="post" >
 				<input type="hidden" name="pageNo" id="pageNo1" value="${result.notice.pageNo}" />
 				<input type="hidden" name="searchTitle" id="searchTitle" value="${result.notice.searchTitle}" >
 				<input type="hidden" name="pageLength" id="pageLength" value="${result.notice.pageLength}" >
@@ -43,27 +42,25 @@
             <td colspan="3"><input type="text" placeholder="검색어를 입력해주세요." id="searchTitle"  name="searchTitle"  value="${result.notice.searchTitle}"></td>
            	<td id="searchBtnTd"><button id="searchBtn"><img src='<c:url value="/resources/images/search.png"/>'></button></td>
             </form>
-            <c:if test="${loginMember.uid=='admin'}">
+           
             <td colspan="3" id="btnSpace">
                 <button id="newBoard">새글작성</button>
             </td>
-            </c:if>
+            
         </tr>
         
         <tr>
-        <c:if test="${admin.uid=='admin'}">
+
             <td id="checkAll">
                 <input type="checkbox" name="boardNo" value="0" id="allTermsCheck">전체선택
             </td>
             <td >
                 <button id="checkDelete">선택 삭제</button>
             </td>
-            </c:if>
+      
         </tr>
         <tr>
-        <c:if test="${admin.uid=='admin'}">
             <td class="boardMenu">선택</td>
-            </c:if>
             <td class="boardMenu">번호</td>
             <td class="boardMenu">제목</td>
             <td class="boardMenu">작성자</td>
@@ -71,20 +68,19 @@
             <td class="boardMenu">조회수</td>
             <td class="boardMenu">상세보기</td>
      </tr>
-        <tr>
-		<c:forEach items="${result.noticeList}" var="list" >
-            <tr >
-            	<c:if test="${admin.uid=='admin'}">
-                <td><input type="checkbox" class="checkTerms"> </td>
-                </c:if>
-                <td class="boardNum"><input class="boardInfoNum" value='<c:out value="${list.boardNum}" />' name="boardNum" readonly="readonly"></td>
-                <td><!-- <a class="boardInfoPage" href="#" > --><c:out value="${list.title}" /><!-- </a> --></td>
-                <td><c:out value="${list.id}" /></td>
-                <td><c:out value="${list.regdate}" /></td>
-                <td><c:out value="${list.readcount}" /></td>
-        		<td><button class="detailBtn">상세보기</button></td>
-            </tr>	
-		</c:forEach>
+		<tbody id="listArea">
+		    <c:forEach items="${result.noticeList}" var="list">
+		        <tr class="boardTr${list.fixed_yn == 'Y' ? ' yellowBackground' : ''}">
+		            <td><input type="checkbox" class="checkTerms"> </td>
+		            <td class="boardNum"><input class="boardInfoNum" value='<c:out value="${list.boardNum}" />' name="boardNum" readonly="readonly"></td>
+		            <td><c:out value="${list.title}" /></td>
+		            <td><c:out value="${list.id}" /></td>
+		            <td><c:out value="${list.regdate}" /></td>
+		            <td><c:out value="${list.readcount}" /></td>
+		            <td><button class="detailBtn">상세보기</button></td>
+		        </tr>
+		    </c:forEach>
+		</tbody>
 			 <c:if test="${empty result.noticeList}">
 	                <tr>
 	                		<td colspan=7>검색결과가 없습니다</td>
@@ -133,7 +129,7 @@
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
     </fieldset>
 </div>
-<input type="hidden" id="writerId" value="${loginMember.uid}" >
+<input type="hidden" id="writerId" value="${admin.uid}" >
 
 
 <div id="dialog-form2" title="게시글 작성하기">
@@ -158,13 +154,13 @@
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
     </fieldset>
 </div>
-	<input type="hidden" value="${loginMember.uid}" id="loginId">
+	<input type="hidden" value="${admin.uid}" id="loginId">
     <button id="openDialogBtn" style="display: none;">다이얼로그 열기</button>
 </body>
 
 
 
-<script src='<c:url value="/resources/js/noticeList.js"/>' > </script>
+<script src='<c:url value="/resources/js/adminNoticeList.js"/>' > </script>
 
 <script type="text/javascript">
 document.querySelector("#searchFm").addEventListener("submit", e => {

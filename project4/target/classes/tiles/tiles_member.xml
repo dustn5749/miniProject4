@@ -27,8 +27,8 @@
 	    <put-attribute name="footer" value="/WEB-INF/views/page/footer.jsp"></put-attribute>
 	</definition>
 
-	<!-- 관리자용 view -->
-	<definition name="admin/adminIndex" template="/WEB-INF/views/admin/adminIndex.jsp">
+	 <!-- 관리자용 view -->
+	<!-- <definition name="admin/adminIndex" template="/WEB-INF/views/admin/adminIndex.jsp">
 	    <put-attribute name="title" value="관리자 페이지"></put-attribute>
 	    <put-attribute name="header" value="/WEB-INF/views/admin/adminHeader.jsp"></put-attribute>
 		<put-attribute name="body" value="/WEB-INF/views/admin/adminMain.jsp"></put-attribute>
@@ -49,6 +49,6 @@
 	<definition name="notice/adminList" template="/WEB-INF/views/notice/adminNoticeList.jsp">
 	    <put-attribute name="title" value="공지사항"></put-attribute>
 	    <put-attribute name="footer" value="/WEB-INF/views/page/footer.jsp"></put-attribute>
-	</definition> 
+	</definition>   -->
 	
 </tiles-definitions>

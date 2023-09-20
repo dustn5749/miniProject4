@@ -156,9 +156,10 @@ var pwd = $("#pwd").val();
 var pwd2 = $("#pwd2").val();
 var name = $("#name").val();
 var phone = $("#phone").val();
+var email =  $("#email").val();
 
 // 회원가입 폼 유효성 검사
-if (uid === "" || pwd === "" || pwd2 === "" || name === "" || phone === "") {
+if (uid === "" || pwd === "" || pwd2 === "" || name === "" || phone === "" || email === "") {
     alert("모든 필드를 입력하세요.");
     return;
 }
@@ -172,20 +173,21 @@ var send = {
     uid: uid,
     pwd: pwd,
     name: name,
-    phone: phone
+    phone: phone,
+    email : email
 };
 
-// Ajax를 사용하여 서버로 회원가입 데이터 전송
+// 회원가입 
 $.ajax({
-    url: "/project4/member/addMember.do", // 회원가입 처리를 담당하는 서버 URL로 수정하세요
-    type: "POST", // HTTP 요청 메서드 선택 (POST 또는 GET)
+    url: "/project4/member/addMember.do", 
+    type: "POST", 
     contentType: "application/json; charset=UTF-8",
     data: JSON.stringify(send),
     dataType: "json",
     success: function (data) {
         if (data.result) {
             alert("회원가입이 완료되었습니다.");
-            $("#dialog-form2").dialog("close"); // 다이얼로그 닫기
+            $("#dialog-form2").dialog("close"); 
         } else {
             alert("회원가입에 실패했습니다. 다시 시도해주세요.");
         }
@@ -451,6 +453,7 @@ function enableInputs() {
 	 $("#mypageName").prop("disabled", false);
 	 $("#mypagePhone").prop("disabled", false);
 	 $("#mypagePwd").prop("disabled", false);
+	 $("#mypageEmail").prop("disabled", false);
 }
 
 
@@ -460,7 +463,9 @@ function updateMember() {
 		uid : $("#mypageId").val(),
 		pwd : $("#mypagePwd").val(),
 		name : $("#mypageName").val(),
-		phone : $("#mypagePhone").val()
+		phone : $("#mypagePhone").val(),
+		email : $("#mypageEmail").val()
+		
 	 }
 	    $.ajax({
 	        url: "/project4/member/updateMember.do",
@@ -475,9 +480,11 @@ function updateMember() {
 	           	 	$("#mypageName").prop("disabled", true);
 	           	 	$("#mypagePhone").prop("disabled", true);
 	           	 	$("#mypagePwd").prop("disabled", true);
+	           	 	$("#mypageEmail").prop("disabled", true);
 	           	 	$("#mypageName").val(data.member.uid);
 	           	 	$("#mypagePhone").val(data.member.phone);
 	           	 	$("#mypagePwd").val(data.member.pwd);
+	           	 	$("#mypageEmail").val(data.member.email);
 	           	 	$("#mypage_form").dialog("open");
 	        	 
 	            } else {
@@ -518,32 +525,3 @@ function deleteMember() {
 	}
 }
 
-
-//// 회원탈퇴하기
-//function deleteMember() {
-//	if(confirm("정말 탈퇴하시겠습니까?")){
-//	var uid = [$("#mypageId").val()];
-//	
-//	var send = {
-//			uids :  uids
-//		}
-//
-//    $.ajax({
-//        url: "/project4/member/delete.do",
-//        type: "POST",
-//        data: JSON.stringify(send),
-//        contentType: "application/json; charset=UTF-8",
-//        dataType: "json",
-//        success: function(data) {
-//            if (data.result) {
-//                alert("회원 탈퇴에 성공하였습니다.");
-//                $("#mypage_form").dialog("close");
-//                location.href="/project4/index/index.do"
-//            } else {
-//                alert("회원 탈퇴 실패");
-//            }
-//        }
-//        
-//    });
-//	}
-//}

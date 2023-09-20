@@ -9,6 +9,7 @@
 		<result property="pwd" column="pwd" />
 		<result property="name" column="name" />
 		<result property="phone" column="phone" />
+		<result property="email" column="email" />
 		
 	</resultMap>
 	
@@ -34,11 +35,13 @@
          , pwd
          , name
          , phone
+         ,email
       ) VALUES (
 		 #{uid}
          , #{pwd}
          , #{name}
          , #{phone}
+         , #{email}
       )
 	</insert>
 	
@@ -74,6 +77,7 @@
 	    SET PWD = #{pwd},
 	        NAME = #{name},
 	        PHONE = #{phone}
+	        EMAIL = #{email}
 	    WHERE ID = #{uid}
 	</update>
 		
@@ -95,4 +99,9 @@
 		from member
 	</select>
 
+	<select id="getEmail" resultType="String">
+		select email 
+		from member
+		where id=#{user}
+	</select>
 </mapper>

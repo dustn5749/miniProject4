@@ -26,5 +26,8 @@ public interface CommentDAO {
 	//댓글 총 수세기
 	int totalComment(int boardnum) throws Exception;
 
+	//댓슬 여러개 삭제
+	boolean deletes(int[] deletePnum) throws Exception;
+
 
 }

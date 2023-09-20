@@ -19,7 +19,7 @@ var dialog = $("#dialog-form").dialog({
 dialog.on("dialogopen", function () {
     var loginId = $("#writerId").val();
     var selectedId = $("#seletedid").val();
-    if (loginId === selectedId) {
+    if (loginId =='admin') {
         dialog.dialog("option", "buttons", {
             "수정하기": function () {
                 $("#seletedtitle, #seletedcontent").prop("readonly", false);
@@ -108,6 +108,7 @@ function updateData() {
               $.each(boardList, function (index, board) {
                   var row = $("<tr></tr>");
                   
+                  row.append(" <td><input type='checkbox' class='checkTerms'> </td>");
                   row.append("<td class='boardNum'><input class='boardInfoNum' value='" + board.boardNum + "' name='boardNum' readonly='readonly'></td>");
                   row.append("<td style='text-align: left'><span style='padding-left:" + (board.level - 1) * 30 + "px'></span>");
                   if (board.level != 1) {
@@ -423,9 +424,8 @@ function deletes(sendData){
         	contentType: "application/json; charset=utf-8",
         	success: function(data) {
             if (data.result) {	
- 					alert("게시판삭제가 완료되었습니다.");
- 					updateData();
- 					
+ 				alert("게시판삭제가 완료되었습니다.");
+ 				updateData();
             } 
         }
 				
@@ -797,5 +797,62 @@ $("#commentList").on("click", ".modifyCommentBtn", function (e) {
 });
 
 
+//
+// 전체선택하기 누를시 모든 체크박스 선택하기
+allTermsCheck.addEventListener("click", allcheck);
+function allcheck(){
+	if(allTermsCheck.checked){
+		for(let i=0; i<checkTerms.length; ++i){
+			checkTerms[i].checked = true;
+		}
+	} else {
+		for(let i=0; i<checkTerms.length; ++i){
+			checkTerms[i].checked = false;
+		}
+	}
+}
+
+// 체크박스에 전부 다 체크할시 전체선택의 체크박스 선택하기
+for(let i=0; i<checkTerms.length; ++i){
+	checkTerms[i].addEventListener("click", checkedAll);
+}
+function checkedAll(){
+	let checkLength = checkTerms.length;
+	let cnt = 0;
+	for(let i=0; i<checkTerms.length; ++i){
+	if(checkTerms[i].checked){
+		cnt++;
+	}
+}
+if(cnt == checkLength){
+	allTermsCheck.checked = true;
+}
+}
+
+
+
+// 선택된 게시물 삭제하기
+checkDeletebtn.addEventListener("click", checkBoardDelete);
+function checkBoardDelete(){
+	let deleteNumList =[];
+	let checkTerms = document.querySelectorAll(".checkTerms");
+	for(let i=0; i<checkTerms.length; ++i){
+		if(checkTerms[i].checked){
+			 let boardNum = checkTerms[i].parentNode.parentNode.querySelector(".boardNum").querySelector(".boardInfoNum").value;
+			deleteNumList.push(boardNum);
+		}
+	}
+	if(deleteNumList.length != 0){
+	console.log("삭제할 번호 리스트 = " + deleteNumList);
+
+			const sendData = {
+				deleteNumList : deleteNumList
+			}
+			deletes(sendData);
+	} else {
+		alert("삭제할 리스트가 없습니다.");
+	}
+
+}
 
 

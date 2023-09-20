@@ -21,7 +21,7 @@
 <a href='<c:url value="/index/index.do"/>'><img  src=  '<c:url value="/resources/images/logo1.png"/>'  id="logo"></a>
 <table id="content-boardList">
         <tr>
-            <td id="boardListTitle" colspan="5">공지사항 목록</td>
+            <td id="boardListTitle" colspan="6">공지사항 목록</td>
         </tr>
         <tr>
            <form name="pageForm" id="pageForm" action="<c:url value='/notice/list.do'/>" method="post" >
@@ -117,28 +117,6 @@
 </div>
 <input type="hidden" id="writerId" value="${loginMember.uid}" >
 
-<div id="dialog-form2" title="게시글 작성하기">
-    <fieldset>
-      <label for="title">제목</label>
-      <input type="text" name="newtitle" id="newtitle" class="info" >
-        <label for="fixed_yn">고정여부
-      Yes<input type="radio" name="fixed_yn" value="Y" id="newfixed_y" class="info" >
-      No<input type="radio" name="fixed_yn" value="N"class="info" id="newfixed_n">
-      </label>
-      <label for="boardnum">글번호</label>
-      <input type="text" name="newboardnum" id="newboardnum" class="info" disabled="disabled">
-      <label for="id">작성자</label>
-      <input type="text" name="newid" id="newid"  class="info" disabled="disabled"><br>
-      <label for="regdate">작성일</label>
-      <input type="date" name="newregdate" id="newregdate" class="info" disabled="disabled">
-       <label for="readcount">조회수</label>
-      <input type="text" name="newreadcount" id="newreadcount" class="info" disabled="disabled">
-    <label for="content">내용</label>
-      <input type="text" name="newcontent" id="newcontent"class="info" ><br>
-      <!-- Allow form submission with keyboard without duplicating the dialog button -->
-      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
-    </fieldset>
-</div>
 	<input type="hidden" value="${loginMember.uid}" id="loginId">
     <button id="openDialogBtn" style="display: none;">다이얼로그 열기</button>
 </body>
