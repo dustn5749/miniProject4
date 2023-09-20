@@ -114,5 +114,15 @@
    </select>
 
 
-	
+	<select id="getTop5List" resultType="Board">
+	    <![CDATA[
+	    SELECT * FROM (
+	        SELECT n.*, ROWNUM r
+	        FROM (
+	            SELECT * FROM board b
+	            ORDER BY boardNum DESC
+	        ) n
+	    ) WHERE r <= 5
+	    ]]>
+	</select>
 </mapper>

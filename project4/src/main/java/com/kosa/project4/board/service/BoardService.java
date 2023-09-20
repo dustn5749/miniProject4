@@ -98,6 +98,13 @@ public class BoardService {
 		
 		return boardDAO.update(board);
 	}
+	
+	// 게시판 top5리스트 출력
+	public List<Board> getTop5Board() throws Exception {
+		System.out.println("boardService.getTop5List");
+		return boardDAO.getTop5List();
+	}
+
 
 
 

@@ -114,6 +114,14 @@ public class MemberService {
 		return memberDAO.getEmail(user);
 	}
 
+	//멤버 정보 5개 가져오기
+	public List<Member> getTop5Member() throws Exception {
+		System.out.println("memberService.getTop5List()"); 
+		List<Member> member =memberDAO.getTop5List(); 
+		System.out.println("memberLIst = " + member );
+		return member;
+	}
+
 
 
 }

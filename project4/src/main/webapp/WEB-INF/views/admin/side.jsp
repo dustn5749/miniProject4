@@ -35,11 +35,14 @@
    a:hover {
    	color : green;
    }
+   
+   ul li {
+   font-size: 20px;
+   }
 
    ul li a {
    	  margin-bottom: 15px;
       color: white; /* 글자 색상 */
-      font-size: 20px; /* 글자 크기 */
       display: block;
    }
 

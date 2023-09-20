@@ -42,6 +42,9 @@ public interface BoardDAO {
 	// 부모글 삭제에 따른 자식글 삭제
 	boolean deleteReplyBoards(int[] deleteLists) throws Exception;
 
+	// TOP5 리스트 출력
+	List<Board> getTop5List() throws Exception;
+
 
 
 }

@@ -23,5 +23,6 @@ public interface MemberDAO {
 		boolean deleteOne(Member member) throws Exception;
 		int getTotalCount(Member member) throws Exception;
 		String getEmail(String user) throws Exception;
+		List<Member> getTop5List() throws Exception;
 	
 }

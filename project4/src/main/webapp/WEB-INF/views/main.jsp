@@ -48,7 +48,6 @@
                 <li><a class="top5List">
                 [<span class="top5boardNum"><c:out  value="${list.boardNum}"/></span>]  <span class="top5boardTitle"><c:out  value="${list.title}"/></span> 
                 </a></li>                     
-                <input type="hidden" value='<c:url value="/notice/detail.do"></c:url>' class="hiddenNum">
               </c:forEach>
               </c:otherwise>   
 			</c:choose>

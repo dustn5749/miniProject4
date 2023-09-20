@@ -95,7 +95,7 @@ public class FileController {
 	           File thumbnail = new File(CURR_IMAGE_REPO_PATH + "\\" +"thumbnail"+ "\\" + getFileName + extension);
 	           if (images.exists()) {
 	        	   thumbnail.getParentFile().mkdirs();
-	               Thumbnails.of(images).forceSize(50, 50).outputFormat("png").toOutputStream(out);
+	               Thumbnails.of(images).forceSize(100, 100).outputFormat("png").toOutputStream(out);
 	           }
 	       }
 	       out.close();

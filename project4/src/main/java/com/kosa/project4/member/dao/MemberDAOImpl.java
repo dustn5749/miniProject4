@@ -119,4 +119,11 @@ public class MemberDAOImpl implements MemberDAO {
 		return email;
 	}
 
+	// 멤버 정보 5개 가져오기
+	@Override
+	public List<Member> getTop5List() throws Exception {
+		System.out.println("MemberDAOImpl.getEmail()");
+		return sqlSession.selectList("mapper.member.getTop5List");
+	}
+
 }

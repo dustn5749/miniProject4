@@ -1,6 +1,7 @@
 package com.kosa.project4.notice.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,7 @@ public class NoticeService {
 		return noticeDAO.add(notice);
 	}
 
-	public Object getTop5Notice() {
-		return null;
+	public List<Notice> getTop5Notice() throws Exception {
+		return noticeDAO.getTop5Notice();
 	}
 }

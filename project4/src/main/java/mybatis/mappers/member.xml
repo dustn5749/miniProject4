@@ -104,4 +104,16 @@
 		from member
 		where id=#{user}
 	</select>
+	
+		<select id="getTop5List" resultMap="memResult">
+	    <![CDATA[
+	    SELECT * FROM (
+	        SELECT n.*, ROWNUM r
+	        FROM (
+	            SELECT * FROM member n
+	            ORDER BY id 
+	        ) n
+	    ) WHERE r <= 5
+	    ]]>
+	</select>
 </mapper>

@@ -39,7 +39,7 @@
         	</select>
         	
         	</td>
-            <td colspan="3"><input type="text" placeholder="검색어를 입력해주세요." id="searchTitle"  name="searchTitle"  value="${result.notice.searchTitle}"></td>
+            <td colspan="4"><input type="text" placeholder="검색어를 입력해주세요." id="searchTitle"  name="searchTitle"  value="${result.notice.searchTitle}"></td>
            	<td id="searchBtnTd"><button id="searchBtn"><img src='<c:url value="/resources/images/search.png"/>'></button></td>
             </form>
            

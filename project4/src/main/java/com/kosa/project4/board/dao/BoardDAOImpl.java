@@ -103,6 +103,13 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSession.delete("mapper.board.deleteReplyBoards", deleteLists) !=0;
 	}
 
+	// top5 리스트 출력
+	@Override
+	public List<Board> getTop5List() throws Exception {
+		System.out.println("boardDAOImpl.getTop5List");
+		return sqlSession.selectList("mapper.board.getTop5List");
+	}
+
 
 	
 
