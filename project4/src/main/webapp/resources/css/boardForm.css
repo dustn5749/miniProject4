@@ -56,11 +56,11 @@ tr.boardTr:hover {
     background-color: #e7ffdd; /* 마우스 포인터가 올라올 때 배경색 */
     color: black;
 }
-	tr.yellowBackground {
+	tr.boardTr.yellowBackground {
 	background-color: #ffffdd;
 	
 }
-        #content-boardList{
+        #content-boardList{000000
             margin: 0 auto;
             text-align: center;
         }

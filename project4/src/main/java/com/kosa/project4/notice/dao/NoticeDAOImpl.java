@@ -79,14 +79,16 @@ public class NoticeDAOImpl implements NoticeDAO {
 		return sqlSession.selectOne("mapper.notice.getTotalCount", notice);
 	}
 
-	//더보기
+	// 공지사항 페이징 리스트
 	@Override
 	public List<Notice> getSearchNoticeList(Notice notice) throws Exception {
 		System.out.println("NoticeDAOImpl.getSearchNoticeList()");
 		Map<String, Object> map = new HashMap();
+		int fixedNoticeCount = sqlSession.selectOne("mapper.notice.fixed_yCount");
 		map.put("StartNo", notice.getStartNo());
 		map.put("EndNo", notice.getEndNo());
 		map.put("searchTitle", notice.getSearchTitle());
+		System.out.println(map);
 		List<Notice> noticeList = new ArrayList<Notice>(); 
 		sqlSession.selectList("mapper.notice.getSearchNoticeList", map);
 		noticeList = (List<Notice>) map.get("v_cursor");

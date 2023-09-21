@@ -29,10 +29,11 @@ public class Notice {
 	private int pageNo = 1; 				// 현재 페이지 번호	
 	private int totalCount;    			 //전체 건수  
 	private int totalPageSize;			// 전체 페이지수			
-	private int pageLength = 10;	// 한페이지의 길이			
+	private int pageLength = 10;		// 한페이지의 길이			
 	private int navSize = 10;				// 페이지 하단에 출력되는 페이지의 항목 수 
 	private int navStart = 0;			// 페이지 하단에 출력되는 페이지의 시작 번호 
 	private int navEnd = 0;				// 페이지 하단에 출력되는 페이지의 끝 번호
+	//private int fixedNoticeCount = 0;	// 고정된 개시물의 갯수
 	
 	// 게시물 삭제 리스트번호 
 	private int[]  deleteNumList;
@@ -51,13 +52,13 @@ public class Notice {
 	}
 	
 	// 현재 페이지에 출력되는 게시글의 시작 번호
-	public int getStartNo() {
-			return (pageNo -1) * pageLength + 1;
+	public int getStartNo(/* int fixedNoticeCount */) {
+		return (pageNo - 1) * pageLength/*-fixedNoticeCount)*/ + 1;
 	}
 	
 	// 현재 페이지에 출력되는 게시글의 끝 번호
-	public int getEndNo() {
-		return pageNo * pageLength;
+	public int getEndNo(/* int fixedNoticeCount */) {
+		return pageNo * (pageLength/*-fixedNoticeCount*/);
 	}
 
 	@Override

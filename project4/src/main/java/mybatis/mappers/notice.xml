@@ -84,14 +84,11 @@
 		)}
 	</insert>
 	
-<!-- 	<delete id="deletes" statementType="CALLABLE">
-		{call DELETE_NOTICE(
-			  #{list}
-			, #{v_cursor, jdbcType=VARCHAR, mode=OUT}
-		)}
-	</delete>
-	 -->
-	
+	<select id="fixed_yCount" resultType="int">
+		select count(*) from 
+		notice 
+		where fixed_yn='Y'
+	</select>
 	
    
 </mapper>

@@ -83,6 +83,7 @@ public class BoardDAOImpl implements BoardDAO {
 		List<Board> BoardList = new ArrayList<Board>(); 
 		sqlSession.selectList("mapper.board.getSearchBoardList", map);
 		BoardList = (List<Board>) map.get("v_cursor");
+		System.out.println("boardList . getSearchBoardList = " + BoardList);
 		return BoardList;
 		
 	}

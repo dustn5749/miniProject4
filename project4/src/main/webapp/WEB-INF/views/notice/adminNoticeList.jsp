@@ -141,9 +141,9 @@
       No<input type="radio" name="fixed_yn" value="N"class="info" id="newfixed_n">
       </label>
       <label for="boardnum">글번호</label>
-      <input type="text" name="newboardnum" id="newboardnum" class="info" disabled="disabled">
+      <input type="text" name="newboardnum" id="newboardnum" class="info" readonly="readonly" >
       <label for="id">작성자</label>
-      <input type="text" name="newid" id="newid"  class="info" disabled="disabled"><br>
+      <input type="text" name="newid" id="newid"  class="info" value="${admin.uid}"><br>
       <label for="regdate">작성일</label>
       <input type="date" name="newregdate" id="newregdate" class="info" disabled="disabled">
        <label for="readcount">조회수</label>

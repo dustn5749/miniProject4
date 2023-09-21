@@ -131,6 +131,8 @@ function updateData() {
           }
       }
   });
+  return false;
+
 }
 
 // 새글 작성 dialog설정
@@ -150,40 +152,10 @@ var wirteDialog = $("#dialog-form2").dialog({
 })
 
 $("#newBoard").click(function(){
-		loginCheck();
+	 wirteDialog.dialog("open");
 })
 
-// 로그인 체크 
-function loginCheck(){
-   console.log("로그인체크 ");
-  
-   $.ajax({
-	   url : "/project4/member/loginCheck.do",
-       type: "POST",
-       contentType: "application/json; charset=UTF-8",
-       dataType: "json",
-       success: function(data) {
-           if (data.result) {
-        	var user = $("#writerId").val();
-   		  	var now = new Date();
-   			var year = now.getFullYear();
-   			var month = ("0" + (now.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더하고 두 자리로 만듦
-   			var day = ("0" + now.getDate()).slice(-2); // 날짜를 두 자리로 만듦
-   			var formattedDate = year + "-" + month + "-" + day;
-   	   		$("#newid").val(user);
-   	   		$("#newregdate").val(formattedDate);
 
-   	   		
-   		    wirteDialog.dialog("open");
-           } else {
-        	   alert("로그인 후 이용해주세요.");
-           }
-       }
-   
-   })
-  
-  
-}
 
 // 첨부파일 버튼 추가하기
 function attachFileBehavior() {
@@ -216,7 +188,7 @@ function addBoard() {
 	    		alert("게시글 작성에 실패하였습니다");
 	    	}
 	    });
-
+	 return false;
 }
 
 
@@ -295,8 +267,8 @@ function deleteFile() {
 	
 }
 
-// 게시글 수정하기
-  function update() {
+//게시글 수정하기
+function update() {
 	  var formData = new FormData($("#updateForm")[0]);	    
 		 
 	  
@@ -313,6 +285,9 @@ function deleteFile() {
 		    		alert("게시판 수정에 성공하였습니다.");
 		    		updateData();
 		    		dialog.dialog("close");
+		    		$("#seletedattachFile").empty();
+		    		$("#result_images").empty();
+		    		$("#fileBtn").empty();
 		    		
 		               $("#seletedtitle").val(data.board.title);
 		                $("#seletedid").val(data.board.id);
@@ -326,14 +301,16 @@ function deleteFile() {
 		                var attaheFiles= data.attacheFile;
 		                var fileListHTML1 = "";
 		                var fileListHTML2 = "";
-		                
-		                for(let i=0; i<attaheFiles.length; ++i ){
-		                	let file = attaheFiles[i];
-		                	displayImages(file);
-		                	fileListHTML1 += "<div><span class='download'>" + file.fileNameOrg + "<button class='downloadBtn'><img src='/project4/resources/images/download.jpg' class='downloadIcon' data-fileNo="+ file.fileNo+"></button></span></div>";
+		                if(attaheFiles.length> 0){
+			                for(let i=0; i<attaheFiles.length; ++i ){
+			                	let file = attaheFiles[i];
+			                	displayImages(file);
+			                	fileListHTML1 += "<div><span class='download'>" + file.fileNameOrg + "<button class='downloadBtn'><img src='/project4/resources/images/download.jpg' class='downloadIcon' data-fileNo="+ file.fileNo+"></button></span></div>";
+			                }
+			                
+			                $("#seletedattachFile").append(fileListHTML1);
 		                }
-		                
-		                $("#seletedattachFile").append(fileListHTML1);
+
 		                
 
 		                var user = $("#writerId").val();
@@ -395,10 +372,10 @@ function deleteFile() {
 		    });
 
 
-              
-            
-       
-    }
+	  return false; 
+         
+    
+ }
 
 // 게시글 삭제하기
 	function deleteBoard (){
@@ -445,6 +422,9 @@ $(document).on("click", ".detailBtn", function() {
         	contentType: "application/json; charset=utf-8",
         	success: function(data) {
             if (data.result) {	
+            	$("#seletedattachFile").empty();
+            	$("#result_images").empty();
+            	$("$fileBtn").empty();
                 $("#seletedtitle").val(data.board.title);
                 $("#seletedid").val(data.board.id);
                 $("#seletedboardnum").val(data.board.boardNum);
@@ -528,8 +508,8 @@ $(document).on("click", ".detailBtn", function() {
 // 파일 이미지 출력하기
 function displayImages(file) {
 	var imageContainer = $(".result_images"); // 이미지를 표시할 컨테이너 엘리먼트
-   
-   
+	imageContainer.empty();
+	//alert(file.fileNo)
     var imageElement = $("<img>").attr("src", "/project4/file/displayImage.do?fileNo=" + file.fileNo);
     imageContainer.append(imageElement); // 이미지 엘리먼트를 컨테이너에 추가
    
@@ -648,7 +628,6 @@ $("#replyBtn").on("click", function () {
 
                     
                     var rowCount = $("#commentList").children().length;
-                    alert(data.commentLength)
                     if(data.commentLength >rowCount){
                     	var commentHtml = '<a href="#" id="plusCommentBtn">더보기</a>'
                     		$("#plus").append(commentHtml);

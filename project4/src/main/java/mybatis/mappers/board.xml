@@ -5,7 +5,16 @@
 
 <mapper namespace="mapper.board">
 
- <resultMap id="boardMap" type="Board"></resultMap>
+ <resultMap id="boardMap" type="Board">
+ 		<result property="boardNum" column="boardNum" />
+		<result property="title" column="title" />
+		<result property="id" column="id" />
+		<result property="content" column="content" />
+		<result property="regdate" column="regdate" />
+		<result property="readcount" column="readcount" />
+		<result property="pnum" column="pnum" />
+		<result property="level" column="level" />
+ </resultMap>
 
  
    <select id="getBoard" resultType="Board" >
@@ -22,7 +31,7 @@
    
    <select id="getSearchBoardList" statementType="CALLABLE">
    	{call board_list(
-   			#{searchTitle} 
+   		#{searchTitle} 
    		, #{StartNo}
    		, #{EndNo}
    		, #{v_cursor, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=boardMap}

@@ -61,7 +61,12 @@ function updateData() {
                 listArea.empty();
                 
                 $.each(noticeList, function (index, notice) {
-                    var row = $("<tr></tr>");
+                    var row = $("<tr class='boardTr'></tr>");
+
+                    if (notice.fixed_yn === "Y") {
+                        row.addClass("yellowBackground");
+                    }
+
                     row.append(" <td><input type='checkbox' class='checkTerms'> </td>");
                     row.append("<td class='boardNum'><input class='boardInfoNum' value='" + notice.boardNum + "' name='boardNum' readonly='readonly'></td>");
                     row.append("<td>" + notice.title + "</td>");
@@ -137,36 +142,8 @@ var wirteDialog = $("#dialog-form2").dialog({
 })
 
 $("#newBoard").click(function(){
-		loginCheck();
+	    wirteDialog.dialog("open");
 })
-
-// 로그인 체크 
-function loginCheck(){
-   console.log("로그인체크 ");
-   
-      fetch("/project4/member/loginCheck.do", {
-        method: 'POST',
-          headers : {
-                'Content-Type': 'application/json; charset=UTF-8'
-         }
-   })
-   .then(response => response.json())
-   .then(function(data) {
-       if (data.result) {
-       	var user = $("#writerId").val();
-  		  	var now = new Date();
-  			var year = now.getFullYear();
-  			var month = ("0" + (now.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 1을 더하고 두 자리로 만듦
-  			var day = ("0" + now.getDate()).slice(-2); // 날짜를 두 자리로 만듦
-  			var formattedDate = year + "-" + month + "-" + day;
-  	   		$("#newid").val(user);
-  	   		$("#newregdate").val(formattedDate);
-  		    wirteDialog.dialog("open");
-          } else {
-       	   alert("로그인 후 이용해주세요.");
-          }
-   })
-}
 
 
 // 게시글 추가하기
@@ -197,6 +174,7 @@ function loginCheck(){
             success: function(data) {
                 if (data.result) {
                     alert("게시판 등록이 완료되었습니다.");
+                   
                     updateData();
                     wirteDialog.dialog("close");              
                 } 
@@ -256,9 +234,11 @@ function jsPageNo(pageNo) {
 	                $("#seletedreadcount").val(data.notice.readcount);
 	                if(data.fixed_yn =="Y"){
 	                    $("#fixed_y").prop("checked", true);
+	                    $("#fixed_y").addClass("yellowBackground");
 	                } else {
 	                    $("#fixed_n").prop("checked", true);
 	                }
+	                
 	                noticedialog.dialog("open");
                     
                     

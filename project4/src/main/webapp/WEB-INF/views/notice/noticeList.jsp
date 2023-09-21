@@ -12,10 +12,10 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  
+
 
 </head>
-<body>
+<body >
 <div id="container">
 
 <a href='<c:url value="/index/index.do"/>'><img  src=  '<c:url value="/resources/images/logo1.png"/>'  id="logo"></a>
@@ -57,7 +57,7 @@
         <tbody id="listArea">
         <tr>
 		<c:forEach items="${result.noticeList}" var="list" >
-            <tr>
+		        <tr class="boardTr${list.fixed_yn == 'Y' ? ' yellowBackground' : ''}">
                 <td class="boardNum"><input class="boardInfoNum" value='<c:out value="${list.boardNum}" />' name="boardNum" readonly="readonly"></td>
                 <td><c:out value="${list.title}" /></td>
                 <td><c:out value="${list.id}" /></td>

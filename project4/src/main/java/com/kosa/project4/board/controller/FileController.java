@@ -54,10 +54,11 @@ public class FileController {
 	public void download(AttacheFile file,
 							HttpServletResponse response) throws Exception {
 		OutputStream out = response.getOutputStream();
+		System.out.println("fileController.download()");
 		AttacheFile attacheFile = attacheFileService.getAttacheFile(file.getFileNo());
 		if(attacheFile != null) {
 			String filePath = CURR_IMAGE_REPO_PATH  + attacheFile.getFileNameReal();
-			System.out.println("` = " + attacheFile);
+			System.out.println("attachFile = " + attacheFile);
 			System.out.println("filePath = " + filePath);
 			File images = new File(filePath);
 			
@@ -79,6 +80,7 @@ public class FileController {
 			in.close();
 		}
 		out.close();
+		System.out.println("download()");
 	}
 	
 	   // 첨부파일 이미지 출력 ( 썸네일 )
@@ -95,7 +97,7 @@ public class FileController {
 	           File thumbnail = new File(CURR_IMAGE_REPO_PATH + "\\" +"thumbnail"+ "\\" + getFileName + extension);
 	           if (images.exists()) {
 	        	   thumbnail.getParentFile().mkdirs();
-	               Thumbnails.of(images).forceSize(100, 100).outputFormat("png").toOutputStream(out);
+	               Thumbnails.of(images).forceSize(500, 500).outputFormat("png").toOutputStream(out);
 	           }
 	       }
 	       out.close();

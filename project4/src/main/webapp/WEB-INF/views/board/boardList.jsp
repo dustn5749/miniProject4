@@ -79,7 +79,6 @@
 	                		<td colspan=7>검색결과가 없습니다</td>
 	                 	</tr>
 	                </c:if>
-        </tr>
     </table>
 	<div style="text-align: center;margin-top:20px;">
 
@@ -118,9 +117,9 @@
        <label for="attachFile">첨부파일</label>
        	<div id="fileBtn"></div>
        <div id="seletedattachFile" style='font-size:8px; align-items: left'></div>
-		<div class="result_images"></div>
+		<div id="result_images"></div>
 		<div id="fileDelete"></div>
-      </table>
+     
     <label for="content">내용</label>
       <input type="text" name="content" id="seletedcontent"class="info" readonly="readonly"><br>
     </form>
@@ -197,6 +196,12 @@
 </div>
 
 <button id="openDialogBtn" style="display: none;">다이얼로그 열기</button>
+
+
+
+<form id="downloadForm" target="_blank" method="get" action="/project4/file/download.do">
+	<input type="hidden" name="fileNo" id="fileNo">
+</form>
 </body>
 
 

@@ -130,6 +130,7 @@ function updateData() {
           }
       }
   });
+  return false;
 }
 
 // 새글 작성 dialog설정
@@ -180,7 +181,7 @@ function loginCheck(){
        }
    
    })
-  
+   return false;
   
 }
 
@@ -188,7 +189,8 @@ function loginCheck(){
 function attachFileBehavior() {
 	var cnt = 1;
     $(".d_file").append("<br>" + "<input type='file'  name='file" + cnt++ +"' class='fileUpload'/>");
-    }
+    return false;    
+}
 
 
 
@@ -215,7 +217,7 @@ function addBoard() {
 	    		alert("게시글 작성에 실패하였습니다");
 	    	}
 	    });
-
+	 return false;
 }
 
 
@@ -242,18 +244,20 @@ function addBoard2() {
 	    		alert("게시글 작성에 실패하였습니다");
 	    	}
 	    });
-
+	 return false;
 }
 
 $("#dialog-form2, #replyWrite-form").on("click", ".attacheFileBtn", function (e) {
 	 e.preventDefault(); 
 	attachFileBehavior();
+	 return false;
 });
 
 
 
 $("#dialog-form2, #replyWrite-form").on("click", ".uploadBtn", function (e) {
 	uploadFile(e)
+	 return false;
 });
 
 
@@ -262,6 +266,7 @@ function reload(){
 	var empty = "";
 	$("#newtitle").val(empty);
 	$("#newcontent").val(empty);
+	 return false;
 }
 
 
@@ -270,6 +275,7 @@ function jsPageNo(pageNo) {
 	console.log("페이지 이동" + pageNo);
 	document.querySelector("#pageNo1").value = pageNo;
 	document.querySelector("#pageForm").submit(); 
+	 return false;
 }
 
 
@@ -281,17 +287,18 @@ document.addEventListener("DOMContentLoaded", function() {
             boardSortElements[i].parentNode.style.backgroundColor = "rgb(241, 247, 240)";
         }
     }
+    return false;
 });
 
 //첨부파일 삭제하기
 function deleteFile() {
 	$("#seletedattachFile").empty();
-	$(".result_images").empty();
+	$("#result_images").empty();
 	$("#fileDelete").empty();
 	$("#seletedattachFile").empty();
 	var cnt = 1;
 	$("#fileBtn").append("<br>" + "<input type='file'  name='file" + cnt++ +"' class='fileUpload'/>");
-	
+	 return false;
 }
 
 // 게시글 수정하기
@@ -312,6 +319,9 @@ function deleteFile() {
 		    		alert("게시판 수정에 성공하였습니다.");
 		    		updateData();
 		    		dialog.dialog("close");
+		    		$("#seletedattachFile").empty();
+		    		$("#result_images").empty();
+		    		$("#fileBtn").empty();
 		    		
 		               $("#seletedtitle").val(data.board.title);
 		                $("#seletedid").val(data.board.id);
@@ -325,14 +335,16 @@ function deleteFile() {
 		                var attaheFiles= data.attacheFile;
 		                var fileListHTML1 = "";
 		                var fileListHTML2 = "";
-		                
-		                for(let i=0; i<attaheFiles.length; ++i ){
-		                	let file = attaheFiles[i];
-		                	displayImages(file);
-		                	fileListHTML1 += "<div><span class='download'>" + file.fileNameOrg + "<button class='downloadBtn'><img src='/project4/resources/images/download.jpg' class='downloadIcon' data-fileNo="+ file.fileNo+"></button></span></div>";
+		                if(attaheFiles.length> 0){
+			                for(let i=0; i<attaheFiles.length; ++i ){
+			                	let file = attaheFiles[i];
+			                	displayImages(file);
+			                	fileListHTML1 += "<div><span class='download'>" + file.fileNameOrg + "<button class='downloadBtn'><img src='/project4/resources/images/download.jpg' class='downloadIcon' data-fileNo="+ file.fileNo+"></button></span></div>";
+			                }
+			                
+			                $("#seletedattachFile").append(fileListHTML1);
 		                }
-		                
-		                $("#seletedattachFile").append(fileListHTML1);
+
 		                
 
 		                var user = $("#writerId").val();
@@ -394,7 +406,7 @@ function deleteFile() {
 		    });
 
 
-              
+	  return false; 
             
        
     }
@@ -412,6 +424,8 @@ function deleteFile() {
 			
 			$("#dialog-form").dialog("close");
 		}
+		
+		 return false;
 	}
 // 삭제시 사용할 ajax 함수 
 function deletes(sendData){
@@ -430,6 +444,8 @@ function deletes(sendData){
         }
 				
 			})
+			
+			 return false;
 }
 // 게시글 상세보기 누를시 상세보기 dialog 열기
 $(document).on("click", ".detailBtn", function() {
@@ -445,6 +461,10 @@ $(document).on("click", ".detailBtn", function() {
         	contentType: "application/json; charset=utf-8",
         	success: function(data) {
             if (data.result) {	
+	    		$("#seletedattachFile").empty();
+	    		$("#result_images").empty();
+	    		$("#fileBtn").empty();
+	    		
                 $("#seletedtitle").val(data.board.title);
                 $("#seletedid").val(data.board.id);
                 $("#seletedboardnum").val(data.board.boardNum);
@@ -457,14 +477,18 @@ $(document).on("click", ".detailBtn", function() {
                 var attaheFiles= data.attacheFile;
                 var fileListHTML1 = "";
                 var fileListHTML2 = "";
-                
-                for(let i=0; i<attaheFiles.length; ++i ){
-                	let file = attaheFiles[i];
-                	displayImages(file);
-                	fileListHTML1 += "<div><span class='download'>" + file.fileNameOrg + "<button class='downloadBtn'><img src='/project4/resources/images/download.jpg' class='downloadIcon' data-fileNo="+ file.fileNo+"></button></span></div>";
+              
+                if(attaheFiles.length > 0){
+                	for(let i=0; i<attaheFiles.length; ++i ){
+                    	let file = attaheFiles[i];
+                    	displayImages(file);
+                    	fileListHTML1 += "<div><span class='download'>" + file.fileNameOrg + "<button class='downloadBtn'><img src='/project4/resources/images/download.jpg' class='downloadIcon' data-fileNo="+ file.fileNo+"></button></span></div>";
+                    }
+                    
+                    $("#seletedattachFile").append(fileListHTML1);
+                	
                 }
                 
-                $("#seletedattachFile").append(fileListHTML1);
                 
 
                 var user = $("#writerId").val();
@@ -522,26 +546,32 @@ $(document).on("click", ".detailBtn", function() {
    //     upReadCount();
     });
 		
-	
+	 	 return false;
 })
 
 // 파일 이미지 출력하기
 function displayImages(file) {
-	var imageContainer = $(".result_images"); // 이미지를 표시할 컨테이너 엘리먼트
-   
+	
+	var imageContainer = $("#result_images"); // 이미지를 표시할 컨테이너 엘리먼트
+	imageContainer.empty();
    
     var imageElement = $("<img>").attr("src", "/project4/file/displayImage.do?fileNo=" + file.fileNo);
     imageContainer.append(imageElement); // 이미지 엘리먼트를 컨테이너에 추가
    
-    
+    return false;
 }
 
 
 
 // 파일 다운로드하기
 $("#seletedattachFile").on("click",".downloadBtn", function (e) {
-	var fileNo = $(e.target).attr("data-fileNo");
-	location.href = "/project4/file/download.do?fileNo=" + fileNo;
+	e.preventDefault();
+	
+	const form = document.querySelector("#downloadForm");
+	form.querySelector("#fileNo").value = $(e.target).attr("data-fileNo");
+	form.submit();
+	
+	return false;
 })
 
 
@@ -594,6 +624,7 @@ $("#plus").on("click", "#plusCommentBtn", function() {
         }
         }
     });
+    return false;
 });
 
 // 댓글 등록하기
@@ -622,11 +653,11 @@ $("#replyBtn").on("click", function () {
             success: function (data) {
                 if (data.result) {
                     alert("댓글 등록이 완료되었습니다.");
-                    dialog.dialog("close");
+                  dialog.dialog("close");
 
                     $("#commentList").empty();
 
-                  
+                    for (var i = 0; i < data.commentList.length; i++) {
                         var comment = data.commentList[i];
                         var commentHtml =
                         	'<div><input class="commentNum" type="hidden" value="' + comment.boardnum + '">' +
@@ -648,7 +679,7 @@ $("#replyBtn").on("click", function () {
 
                     
                     var rowCount = $("#commentList").children().length;
-                    alert(data.commentLength)
+                    
                     if(data.commentLength >rowCount){
                     	var commentHtml = '<a href="#" id="plusCommentBtn">더보기</a>'
                     		$("#plus").append(commentHtml);
@@ -657,10 +688,12 @@ $("#replyBtn").on("click", function () {
                     }
 
                     dialog.dialog("open");
-                 
+                }             
             }
         });
+    
     }
+        return false;
 });
 
 //댓글 삭제하기
@@ -721,6 +754,7 @@ $("#commentList").on("click", ".deleteCommentBtn", function (e) {
             }
         }
     });
+    return false;
 });
 
 //댓글 수정버튼 활성화
@@ -794,8 +828,39 @@ $("#commentList").on("click", ".modifyCommentBtn", function (e) {
         target.closest("div").find(".comment-content").prop("disabled", false);
         target.html("완료");
     }
+    return false;
 });
 
+//
+//전체선택하기 누를시 모든 체크박스 선택하기
+allTermsCheck.addEventListener("click", allcheck);
+function allcheck(){
+	if(allTermsCheck.checked){
+		for(let i=0; i<checkTerms.length; ++i){
+			checkTerms[i].checked = true;
+		}
+	} else {
+		for(let i=0; i<checkTerms.length; ++i){
+			checkTerms[i].checked = false;
+		}
+	}
+}
 
+//체크박스에 전부 다 체크할시 전체선택의 체크박스 선택하기
+for(let i=0; i<checkTerms.length; ++i){
+	checkTerms[i].addEventListener("click", checkedAll);
+}
+function checkedAll(){
+	let checkLength = checkTerms.length;
+	let cnt = 0;
+	for(let i=0; i<checkTerms.length; ++i){
+	if(checkTerms[i].checked){
+		cnt++;
+	}
+}
+if(cnt == checkLength){
+	allTermsCheck.checked = true;
+}
+}
 
 

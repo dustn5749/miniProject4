@@ -1,6 +1,7 @@
 package com.kosa.project4.notice.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +32,8 @@ public class NoticeController {
 	public String NoticeList(Notice notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("list()");
 		try {
+			
+			System.out.println("noticeList = " + noticeService.getNoticeList(notice));
 			request.setAttribute("result", noticeService.getNoticeList(notice));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -93,12 +96,13 @@ public class NoticeController {
 	}
 	
 	// 새글 작성하기
-	@RequestMapping(value="/notice/insertNotice.do", method=RequestMethod.POST )
+	@RequestMapping("/notice/insertNotice.do")
 	@ResponseBody
-	public Map<String, Object> insertNotice( Notice notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public Map<String, Object> insertNotice(@RequestBody Notice notice, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("insertNotice()");
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
+			
 			map.put("result", noticeService.add(notice));
 		} catch (Exception e) {
 			e.printStackTrace();

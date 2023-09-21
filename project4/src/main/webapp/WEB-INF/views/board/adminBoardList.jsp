@@ -136,8 +136,8 @@
     <div id="commentList"></div>
     <div id="plus"></div>
 	<div id="replyContent">
-	<c:if test="${loginMember != null}">
-	<span id="idSpan">${loginMember.uid}</span>
+	<c:if test="${admin != null}">
+	<span id="idSpan">${admin.uid}</span>
 	<input type="text" id="reply" placeholder="댓글을 남겨보세요.">
 	<span id="replyBtnSpan"><input type="button" value="등록" id="replyBtn"></span>
 	</c:if>
@@ -166,6 +166,42 @@
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
     </fieldset>
 </div>
+
+<div id="replyWrite-form" title="답글 작성하기">
+    <fieldset>
+    <form id="attachForm2" enctype="multipart/form-data">
+      <label for="title">제목</label>
+      <input type="text" name="title" id="replytitle" class="info" >
+      <label for="boardnum">글번호</label>
+      <input type="text" name="boardNum" id="replyboardnum" class="info" disabled="disabled">
+      <label for="id">작성자</label>
+      <input type="text" name="id" id="replyid" value="${admin.uid}  class="info"readonly="readonly"><br>
+      <label for="regdate">작성일</label>
+      <input type="date" name="replyregdate" id="replyregdate" class="info" readonly="readonly">
+     
+      <input type="hidden" name="pnum" id="replyPboardnum" class="info" >
+      
+      <table class="attacheTb">
+      	<tr>
+      		<td  class="attacheFile"><button class="attacheFileBtn">첨부파일</button></td>
+      		<td class="attachFileInfo"><div class="d_file"></div></td>
+      	</tr>      	
+      </table>
+    <label for="content">내용</label>
+     <input type="text" name="content" id="replycontent2"class="info" ><br>
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"><br>
+    </form>  
+    </fieldset>
+</div>
+
+
+
+<form id="downloadForm" target="_blank" method="get" action="/project4/file/download.do">
+	<input type="hidden" name="fileNo" id="fileNo">
+</form>
+</body>
+
 
 <button id="openDialogBtn" style="display: none;">다이얼로그 열기</button>
 </body>
