@@ -424,7 +424,7 @@ $(document).on("click", ".detailBtn", function() {
             if (data.result) {	
             	$("#seletedattachFile").empty();
             	$("#result_images").empty();
-            	$("$fileBtn").empty();
+            	$("#fileBtn").empty();
                 $("#seletedtitle").val(data.board.title);
                 $("#seletedid").val(data.board.id);
                 $("#seletedboardnum").val(data.board.boardNum);
