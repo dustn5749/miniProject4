@@ -87,7 +87,7 @@
 	
 	<div style="text-align: center;margin-top:20px;">
 		<c:if test="${result.board.navStart != 1}">
-			<a href="#" onclick="jsPageNo(${result.board.navStart-1})" style="padding: 10px;"> &lt; </a> 
+			<a href="#" onclick="jsPageNo(${result.board.navStart-1})" style='padding: 10px;'> &lt; </a> 
 		</c:if>
 		<c:forEach var="item" begin="${result.board.navStart}" end="${result.board.navEnd}">
 		 	<c:choose>
