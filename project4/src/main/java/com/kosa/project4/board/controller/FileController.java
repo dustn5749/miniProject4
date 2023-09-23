@@ -94,11 +94,14 @@ public class FileController {
 	           String getFileName = attacheFile.getFileNameOrg();
 	           int lastIndex = getFileName.lastIndexOf(".");
 			   String extension = getFileName.substring(lastIndex);
-	           File thumbnail = new File(CURR_IMAGE_REPO_PATH + "\\" +"thumbnail"+ "\\" + getFileName + extension);
-	           if (images.exists()) {
-	        	   thumbnail.getParentFile().mkdirs();
-	               Thumbnails.of(images).forceSize(500, 500).outputFormat("png").toOutputStream(out);
-	           }
+			   if(extension.contains("jpg") || extension.contains("png") || extension.contains("jepg")) {
+				   File thumbnail = new File(CURR_IMAGE_REPO_PATH + "\\" +"thumbnail"+ "\\" + getFileName + extension);
+		           if (images.exists()) {
+		        	   thumbnail.getParentFile().mkdirs();
+		               Thumbnails.of(images).forceSize(500, 500).outputFormat("png").toOutputStream(out);
+		           }
+			   }
+	         
 	       }
 	       out.close();
 	   }

@@ -29,6 +29,7 @@ import com.kosa.project4.board.model.AttacheFile;
 import com.kosa.project4.board.model.Board;
 import com.kosa.project4.board.service.AttacheFileService;
 import com.kosa.project4.board.service.BoardService;
+import com.kosa.project4.board.service.MailService;
 import com.kosa.project4.comment.model.Comment;
 import com.kosa.project4.comment.service.CommentService;
 import com.kosa.project4.member.service.MemberService;
@@ -141,8 +142,6 @@ public class BoardController {
 		System.out.println("boardInsert()");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-	
-		request.setCharacterEncoding("utf-8");
 
 		
 	      String id = request.getParameter("id");
@@ -177,8 +176,6 @@ public class BoardController {
 		System.out.println("boardInsert2()");
 		Map<String, Object> map = new HashMap<String, Object>();
 		Map<String, Object> resultMap = new HashMap<String, Object>();
-	
-		 request.setCharacterEncoding("utf-8"); 
 
 		
 	      String id = request.getParameter("id");

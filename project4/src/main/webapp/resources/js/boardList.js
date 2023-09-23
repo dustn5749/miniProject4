@@ -442,7 +442,6 @@ function deletes(sendData){
  					
             } 
         }
-				
 			})
 			
 			 return false;
@@ -654,7 +653,7 @@ $("#replyBtn").on("click", function () {
                 if (data.result) {
                     alert("댓글 등록이 완료되었습니다.");
                   dialog.dialog("close");
-
+                  $("#reply").val("");
                     $("#commentList").empty();
 
                     for (var i = 0; i < data.commentList.length; i++) {
@@ -686,7 +685,6 @@ $("#replyBtn").on("click", function () {
                     }else{
                         $("#plusCommentBtn").remove();
                     }
-
                     dialog.dialog("open");
                 }             
             }

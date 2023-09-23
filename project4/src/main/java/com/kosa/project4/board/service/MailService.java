@@ -1,4 +1,4 @@
-package com.kosa.project4.board.controller;
+package com.kosa.project4.board.service;
 
 import javax.mail.internet.MimeMessage;
 
