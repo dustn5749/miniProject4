@@ -24,9 +24,9 @@ import com.kosa.project4.notice.dao.NoticeDAO;
 import com.kosa.project4.notice.service.NoticeService;
 
 @Controller
-public class HomeController {
+public class MainController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 	
 	@Autowired
 	public NoticeService noticeService;
