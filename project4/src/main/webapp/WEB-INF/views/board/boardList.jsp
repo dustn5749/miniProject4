@@ -57,9 +57,8 @@
             <td class="boardMenu">상세보기</td>
      </tr>
       <tbody id="listArea">
-        <tr>
 		<c:forEach items="${result.boardList}" var="list" >
-            <tr >
+            <tr  class="boardTr">
                 <td class="boardNum"><input class="boardInfoNum" value='<c:out value="${list.boardNum}" />' name="boardNum" readonly="readonly"></td>
                  <td style="text-align: left">
                      <span style="padding-left:${(list.level-1)*30}px"></span>

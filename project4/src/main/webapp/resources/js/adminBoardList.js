@@ -7,6 +7,13 @@ const checkModifybtn = document.querySelector("#checkModify");
 const boardInfoPage = document.querySelectorAll(".boardInfoPage");
 
 
+document.querySelector("#searchFm").addEventListener("submit", e => {
+	console.log(document.querySelector("#searchTitle").value);
+	document.querySelector("#searchFm > #pageNo2").value = "1";
+	return true;
+});
+
+
 //dialog에 대한 정보 설정 (상세보기)
 var dialog = $("#dialog-form").dialog({
 	autoOpen: false,

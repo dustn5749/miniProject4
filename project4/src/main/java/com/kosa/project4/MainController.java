@@ -39,23 +39,24 @@ public class MainController {
 
 	
 	@RequestMapping(value = { "/", "/index/index.do"}, method = RequestMethod.GET)
-	public String home(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response) {
+	public String home(Model model) {
 		try {
-			request.setAttribute("top5List", noticeService.getTop5Notice());
+			model.addAttribute("top5List", noticeService.getTop5Notice());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		return "main";
 	}
 	
 	//관리자 페이지로  이동
 	@RequestMapping(value = "/admin.do")
-	public String adminPage(Member member,HttpServletRequest  request, HttpSession session) throws Exception{
+	public String adminPage(Model model) throws Exception{
 		System.out.println("adminPage()");
 		try {
-			request.setAttribute("boardtop5List", boardService.getTop5Board());
-			request.setAttribute("noticetop5List", noticeService.getTop5Notice());
-			request.setAttribute("membertop5List", memberService.getTop5Member());
+			model.addAttribute("boardtop5List", boardService.getTop5Board());
+			model.addAttribute("noticetop5List", noticeService.getTop5Notice());
+			model.addAttribute("membertop5List", memberService.getTop5Member());
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,34 +4,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>회원 정보 상세보기</title>
-    <link rel="stylesheet" href='<c:url value="/resources/css/memberlist.css"></c:url>'>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-</head>
-<body>
-<script>
-
-    var currentPageNo = ${result.member.pageNo};
-</script>
 
 <div class="container">
 		<input type="hidden" name="pageNo" id="pageNo1" value="${result.member.pageNo}" />
 		<input type="hidden" name="pageLength" id="pageLength" value="${result.member.pageLength}" >
     <table>
         <caption>회원 정보 상세 보기</caption>
+
         <tr>
-        </tr>
-        <tr>
-        <td><button id="checkDelete">선택 삭제</button></td>
-        <td>
-        </td>
-        <td colspan="5"></td>
+        	<td><button id="checkDelete">선택 삭제</button></td>
+       		<td colspan="5"></td>
         </tr>
         <tr>
         	<th><input type="checkbox" id="allTermsCheck">전체선택</th>
@@ -91,7 +73,3 @@
 </div>
 
 
-</body>
-<script src='<c:url value="/resources/js/memberlist.js"></c:url>'>
-</script>
-</html>

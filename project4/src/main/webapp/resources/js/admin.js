@@ -1,6 +1,13 @@
 
 var logoutbtn = document.querySelector("#logoutbtn");
 var boardBtn = document.querySelector("#board");
+//사이드바
+
+	function displayMenu(clickedElement) {
+		var parentListItem = clickedElement.parentElement;
+		parentListItem.classList.toggle("active");
+	} 
+
 
 //로그인하기
 $("#login_form").dialog({
@@ -305,3 +312,6 @@ function deleteMember() {
 
 	}
 }
+
+
+

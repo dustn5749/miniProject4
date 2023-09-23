@@ -66,6 +66,7 @@ tr.boardTr:hover {
         }
         #content-boardList>tr>td {
         border-bottom: 1px solid rgb(129, 188, 84);
+       
         }
         #boardListTitle{
             height: 100px;
