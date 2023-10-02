@@ -1,0 +1,223 @@
+@charset "UTF-8";
+      @font-face {
+          font-family: 'LINESeedKR-Bd';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2');
+          font-weight: 700;
+          font-style: normal;
+      }
+      @font-face {
+          font-family: 'OTWelcomeRA';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+      }
+      @font-face {
+          font-family: 'NanumSquareNeo-Variable';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+      }
+      #container {
+    text-align: center;
+    margin:  0 auto;
+    justify-content: center;
+  }
+#logo {
+	align-items: center;
+	width: 250px;
+	cursor: pointer;
+	margin: 10px;
+}
+
+      table,tr, td {
+          border-collapse: collapse;
+      }
+      td {
+      }
+      #content-newboard{
+          margin: 0 auto;
+      }
+      #newboarHeader{
+          text-align: center;
+          font-size: 35px;
+          font-family: 'LINESeedKR-Bd';
+          height: 100px;
+          border-bottom: 1px solid rgb(179, 240, 179);
+      }
+      .newboardMenu{
+          width: 80px;
+          height: 40px;
+          text-align: center;
+          font-size: 17px;
+          font-family: 'NanumSquareNeo-Variable';
+          font-weight: bold;
+          background-color:rgb(186, 235, 186);
+      }
+      #selectbox {
+      width : 150px;
+      height: 30px;
+      text-align: center;
+      }
+      #selectInput{
+    text-align: left;           
+}
+     .boardInput {
+          width: 180px;
+      }
+      #title {
+          width: 90%;
+          height: 30px;
+          border: 1px soild #ffffff ;
+      }
+      #inputcontent{
+          height: 500px;
+      }
+      #content-memo {
+          width: 95%;
+          height: 98%;
+           border: 1px soild #ffffff;
+            
+      }
+      #newBoardBtn-space{
+          text-align: center;
+          height: 60px;
+      }
+     #boardListbtn, #boardUpdatebtn, #boardDeletebtn{
+          border-radius: 5px;
+          height: 50px;
+          width: 130px;
+          font-size: 16px;
+          font-family: 'NanumSquareNeo-Variable';
+          background-color: rgb(186, 235, 186); 
+          cursor: pointer;
+          vertical-align: middle;
+        }
+        button {
+              box-shadow: 1px 2px 1px 1px #e2e0e0;        
+              border : 1px solid #e2e0e0;
+              margin : 20px;
+        }
+      #boardUpdatebtn:active,
+      #boardUpdatebtn:hover,
+      #boardUpdatebtn:focus,
+      #boardListbtn:focus,
+       #boardListbtn:active,
+      #boardListbtn:hover,
+      #boardDeletebtn:hover,
+      #boardDeletebtn:active,
+      #boardDeletebtn:focus
+      {
+          background-color: green;
+          color: white;
+          font-weight: bold;
+      }
+      #newboardTitle{
+        text-align:left;
+      }
+      #loveBtn{
+      cursor: pointer;
+      width:55px;
+      height: 50px;
+      background: white;
+      border-radius: 15px;
+      }
+      #loveBtn:hover{
+	box-shadow: 2px 2px 2px 2px green;
+}
+#replyTb{
+	width: 1000px;
+}
+
+  #replyContent{
+ font-family: 'NanumSquareNeo-Variable';
+  width:100%;
+  height: 200px;
+  text-align: left;
+  padding-left: 30px;
+  padding-top:30px;
+  border-radius: 10px;
+  border: 1px solid #e4e4e4;
+ 	margin: 0 atuo;
+ 	align-content: center;
+  }
+  
+  #reply{
+ width:87%;
+  height: 80%;
+  border:none;
+  }
+  #replycontTr{
+  	text-align: left;
+  	font-family: 'NanumSquareNeo-Variable';
+	font-size: 15px;
+	font-weight: bold;
+	padding: 10px;
+  }
+  #replyBtn{
+	width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    cursor:pointer;
+    background:  rgb(186, 235, 186);
+    border:none;
+     box-shadow: 1px 2px 1px 1px #e2e0e0;     
+      font-family: 'NanumSquareNeo-Variable';
+     font-size: 15px;   
+  }
+    #replyBtn:hover{
+              background-color: green;
+          		color: white;
+    }
+  #replycnt{
+  	color:red;
+  }
+    
+    .updateReply, .deleteReply{
+   	width: 80px;
+   	height: 30px;
+   	cursor:pointer;
+   	background: #c0e0fe;
+   	color : black;
+   	border-radius: 5px;
+   	box-shadow: 1px 2px 1px 1px #e2e0e0;     
+   	border:none;
+   }
+    .updateReply:hover, .deleteReply:hover{
+          background-color: rgb(186, 235, 186); 
+          color:white;
+    }
+    .replyArea {
+    height: 50px;
+    }
+
+    .replyUpdateId{
+    	width : 7%;
+    }
+ 	.replytd{
+ 	width: 60%;
+ 	height: 100%;
+ 	}
+	.replyInput{
+		width: 90%;
+		height: 30px;
+	}
+    .replynum{
+	width: 3%;
+	display: hidden;
+    }
+    .replynum{
+    	  display: none;
+    }
+    .commentArea{
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+   }
+   .replybtnArea{
+   width: 5%;
+   align-items: center;
+   }
+#replyBtnSpan{
+	width: 300px;
+}

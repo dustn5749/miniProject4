@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.notice">
+ <resultMap id="noticeMap" type="Notice"></resultMap>
+
+
+	<select id="getSearchNoticeList" statementType="CALLABLE">
+		{call notice_list(
+			#{searchTitle} 
+   		, #{StartNo}
+   		, #{EndNo}
+   		, #{v_cursor, jdbcType=CURSOR, mode=OUT, javaType=java.sql.ResultSet, resultMap=noticeMap}
+		
+		)}
+	</select>
+
+	<select id="getTop5Notice" resultType="Notice">
+	    <![CDATA[
+	    SELECT * FROM (
+	        SELECT n.*, ROWNUM r
+	        FROM (
+	            SELECT * FROM notice n
+	            ORDER BY fixed_yn desc, boardNum DESC
+	        ) n
+	    ) WHERE r <= 5
+	    ]]>
+	</select>
+	
+	<update id="upReadCount">
+	<![CDATA[
+		UPDATE notice SET  
+		readcount = readcount + 1 
+		WHERE BOARDNUM = #{boardNum}
+	]]>
+	</update>
+	
+
+	<select id="getNotice" resultType="Notice">
+      select 
+          TITLE 
+         , ID 
+         , BOARDNUM 
+         , REGDATE 
+         , CONTENT 
+         , READCOUNT  
+      from notice     
+      where BOARDNUM = #{boardNum}
+  
+   </select>
+   
+   <update id="update" statementType="CALLABLE">
+	{CALL UPDATE_NOTICE(
+		 #{title}
+		, #{content}
+		, #{fixed_yn}
+		, #{boardnum}
+		, #{v_cursor, mode=OUT, jdbcType=VARCHAR}
+	)}
+   </update>
+   
+      <select id="getTotalCount" resultType="int">
+         select count(*) 
+         from notice 
+   </select>
+   
+   	<delete id="deletes" >
+	    DELETE FROM notice 
+	    WHERE BOARDNUM IN 
+	    <foreach item="item" collection="array" open="(" separator="," close=")">
+	        #{item} 
+	    </foreach>
+	</delete> 
+	
+	<insert id="insert" statementType="CALLABLE">
+		{call INSERT_NOTICE(
+			  #{id}
+			, #{title}
+			, #{content}
+			, #{fixed_yn}
+			, #{v_cursor, jdbcType=VARCHAR, mode=OUT}
+		)}
+	</insert>
+	
+	<select id="fixed_yCount" resultType="int">
+		select count(*) from 
+		notice 
+		where fixed_yn='Y'
+	</select>
+	
+   
+</mapper>

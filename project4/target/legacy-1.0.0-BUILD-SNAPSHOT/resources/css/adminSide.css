@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+   .no-underline {
+      text-decoration: none;
+   }
+
+   /* 사이드 메뉴 스타일 */
+   ul {
+      list-style: none;
+      padding: 0;
+   }
+
+   ul li {
+      margin-bottom: 30px; /* 각 메뉴 항목 아래 간격 */
+   }
+   
+   
+   a { 
+   cursor: pointer;
+   text-decoration:  none;
+   }
+   
+   a:hover {
+   	color : green;
+   }
+   
+   ul li {
+   font-size: 20px;
+   }
+
+   ul li a {
+   	  margin-bottom: 15px;
+      color: white; /* 글자 색상 */
+      display: block;
+   }
+
+   ul li ul {
+      display: none; /* 초기에 하단 메뉴 숨김 */
+   }
+
+    ul li.active ul {
+      display: block; /* active 클래스가 있는 메뉴만 하단 메뉴 표시 */
+   } 
+   
